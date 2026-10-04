@@ -67,9 +67,7 @@ python3 -m http.server 8001
 
 ## 发布到 GitHub Pages
 
-可以把主页公开发布成类似 Tango 的站点。精确使用 `https://kimodo-policy.github.io/` 需要 GitHub 上名为 `kimodo-policy` 的用户或组织，并由它拥有名为 `kimodo-policy.github.io` 的公开仓库。将 `web/` 目录中的内容（根目录 `index.html`、`favicon.svg`、`figure/`、`paper/` 和 `script/`）放在该仓库根目录，再在仓库 **Settings → Pages** 中选择从主分支根目录发布。
-
-如果没有 `kimodo-policy` 这个用户名或组织，也可以发布在现有账户的项目仓库，网址格式为 `https://<账户名>.github.io/<仓库名>/`。当前文件只准备好了站点内容，尚未推送或公开发布。
+主页由 `kimodo-policy/kimodo-policy.github.io` 公开发布，网址为 `https://kimodo-policy.github.io/`。仓库根目录包含网站文件和 `.github/workflows/deploy.yml`，每次推送到 `main` 后由 GitHub Actions 自动部署。
 
 ## 标准更新流程
 
