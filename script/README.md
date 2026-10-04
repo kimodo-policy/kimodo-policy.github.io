@@ -2,10 +2,10 @@
 
 ## 本地运行
 
-在网站仓库根目录启动静态服务器：
+在 `web` 目录启动静态服务器：
 
 ```sh
-cd /path/to/kimodo-policy.github.io
+cd /data/local-data/data/code/yunhengwang/paper/web
 python3 -m http.server 8001
 ```
 
@@ -34,7 +34,7 @@ python3 -m http.server 8001
 | Conclusion 标题与正文 | `#conclusion` | 直接修改该栏目中的标题和段落 |
 | 页面底部文字 | `.site-footer` | 直接修改 HTML 文本 |
 
-当前版本的 Experiment 保留预训练介绍及 HumanoidArena/SIMPLE 基准结果图，已移除 HumanoidArena 任务卡片、真机任务卡片和部署配置图。其余保留图片附近有中文 HTML 注释，说明素材用途和替换方式。
+当前 `web` 版本的 Experiment 保留预训练介绍及 HumanoidArena/SIMPLE 基准结果图，已移除 HumanoidArena 任务卡片、真机任务卡片和部署配置图。其余保留图片附近有中文 HTML 注释，说明素材用途和替换方式。
 
 ## 如何换图、调尺寸和位置
 
@@ -67,6 +67,42 @@ python3 -m http.server 8001
 
 ## 发布到 GitHub Pages
 
-可以把主页公开发布成类似 Tango 的站点。组织 `kimodo-policy` 拥有公开仓库 `kimodo-policy.github.io`，网站通过 `.github/workflows/deploy.yml` 自动部署到 `https://kimodo-policy.github.io/`。更新根目录的 `index.html`、`figure/`、`paper/` 和 `script/` 后提交到 `main` 即可触发部署。
+可以把主页公开发布成类似 Tango 的站点。精确使用 `https://kimodo-policy.github.io/` 需要 GitHub 上名为 `kimodo-policy` 的用户或组织，并由它拥有名为 `kimodo-policy.github.io` 的公开仓库。将 `web/` 目录中的内容（根目录 `index.html`、`favicon.svg`、`figure/`、`paper/` 和 `script/`）放在该仓库根目录，再在仓库 **Settings → Pages** 中选择从主分支根目录发布。
 
 如果没有 `kimodo-policy` 这个用户名或组织，也可以发布在现有账户的项目仓库，网址格式为 `https://<账户名>.github.io/<仓库名>/`。当前文件只准备好了站点内容，尚未推送或公开发布。
+
+## 标准更新流程
+
+日常编辑只需要修改本地 `/data/local-data/data/code/yunhengwang/paper/web`。这个目录是网站源文件目录，不建议直接在其中执行 `git push`；推荐使用一个单独的主页仓库 clone 作为发布工作区。
+
+第一次准备发布工作区：
+
+```sh
+gh auth switch --user zzzzzzzzjx
+cd /data/local-data/data/code/yunhengwang/paper
+gh repo clone kimodo-policy/kimodo-policy.github.io
+cd kimodo-policy.github.io
+git config user.name "JesseZhang"
+git config user.email "zzzzzzzzjx@users.noreply.github.com"
+```
+
+每次修改 `web/` 后，同步并提交：
+
+```sh
+rsync -a --delete \
+  --exclude='.git/' \
+  --exclude='.github/' \
+  --exclude='paper/main_arxiv copy.pdf' \
+  --exclude='web.tar.gz' \
+  /data/local-data/data/code/yunhengwang/paper/web/ \
+  /data/local-data/data/code/yunhengwang/paper/kimodo-policy.github.io/
+
+cd /data/local-data/data/code/yunhengwang/paper/kimodo-policy.github.io
+git status
+git add .
+git diff --cached --stat
+git commit -m "Update Kimodo-Policy website"
+git push origin main
+```
+
+不要删除 `.github/`，其中包含 GitHub Pages 自动部署工作流；不要把论文 PDF 重新复制进主页仓库，Paper 按钮已经链接到 Release 资产。推送成功后，Actions 通常需要几十秒到几分钟完成部署，主页地址为 `https://kimodo-policy.github.io/`。
