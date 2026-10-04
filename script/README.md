@@ -18,7 +18,7 @@ python3 -m http.server 8001
 | 页面内容 | 文件与定位方式 | 当前素材 / 文案位置 |
 |---|---:|---|
 | 封面背景图 | `index.html` 的 `.cover-image` | `../figure/cover.png` |
-| 左上角实验室 Logo | `.lab-logo` | `../figure/hcl.png` |
+| 浏览器标签页头像 | 两个入口 HTML 的 `<link rel="icon">` | `../figure/avator.png`；该图片也用于 GitHub `kimodo-policy` 组织头像 |
 | 封面标题、副标题、作者与单位 | `.cover-content` 内标题、`.author-list`、`.affiliation-list`、`.author-notes` | 作者姓名后的上标为单位编号；`★` 为共同一作，`†` 为通讯作者；单位编号与作者对应论文 TeX |
 | arXiv、Code、Hugging Face 链接 | `.hero-actions` | arXiv 当前链接到本地论文 PDF；代码和模型发布后给对应按钮补上正式网址。按钮图标在 `../figure/brand/` |
 | 顶部栏目导航 | `.section-nav` | 修改栏目文字和对应的 `href="#栏目id"` |
@@ -53,7 +53,7 @@ python3 -m http.server 8001
 **调整图片显示大小：**
 
 - 普通板块配图的宽度、自动高度由 `static/css/index.css` 的 `.paper-figure img` 控制；最大高度在 `static/css/kimodo.css` 的 `.paper-figure img` 控制。正文容器宽度由 `.container.is-max-desktop` 控制。
-- 封面 Logo 的尺寸由 `static/css/kimodo.css` 的 `.lab-logo` 控制，当前为 `116 × 52px`；手机尺寸在同文件的 `@media (max-width: 768px)` 规则中单独设置。
+- 浏览器标签页头像由两个入口 HTML 的 `<link rel="icon">` 控制，替换 `figure/avator.png` 即可更新；GitHub 组织头像需要在组织设置中单独更新。
 - 封面图的取景位置由 `static/css/kimodo.css` 的 `.cover-image` `object-position` 控制；例如改成 `center 45%` 可调整画面取景。
 - 任务视频卡片统一为 `16:9`，由 `.task-video { aspect-ratio: 16 / 9; }` 控制。图片使用 `object-fit: cover` 填满卡片；若希望完整显示而允许留边，可改成 `contain`。
 
