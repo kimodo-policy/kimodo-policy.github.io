@@ -77,7 +77,7 @@
         <!-- 总览文案：可根据项目主页需要单独修改这段简介。 -->
         <p>Humanoid loco-manipulation requires a robot to interpret language and visual observations while coordinating navigation, balance, posture, and dexterous interaction over long horizons. These tightly coupled behaviors demand both coherent whole-body motion and continual correction from sensory feedback.</p>
         <p>We introduce <strong class="accent-text">Kimodo-Policy</strong>, a visually grounded humanoid policy that adapts a pretrained Text-to-Motion diffusion model to closed-loop control. A structured motion prior supplies coordinated trajectories, visual conditioning grounds them in the current scene, and a root–body–hand hierarchy organizes actions according to their physical roles.</p>
-        <p>Across HumanoidArena, SIMPLE, and real-robot evaluations, <strong class="accent-text">Kimodo-Policy</strong> demonstrates strong task performance and benefits from VLA policy pretraining, providing a practical path from motion generation to whole-body humanoid control.</p>
+        <p>Across simulation and physical-robot evaluations, <strong class="accent-text">Kimodo-Policy</strong> achieves <strong class="result-highlight">72.14% overall success on multi-task HumanoidArena</strong>, reaches <strong class="result-highlight">best or joint-best performance on six of eight SIMPLE tasks</strong>, and obtains a <strong class="result-highlight">60% mean success rate across eight real-world tasks</strong>. These results show that transferring motion priors into a visually grounded whole-body policy improves both benchmark performance and deployment reliability.</p>
       </div>
       <!-- 总览配图：使用 overview1.png 展示任务覆盖、预训练数据规模与策略结构；替换图片时保持同一素材路径即可。 -->
       <figure class="paper-figure">
@@ -139,8 +139,8 @@
     <div class="container is-max-desktop">
       <h2 class="title is-3">Simulation and real-world evaluation.</h2>
       <div class="content has-text-justified">
-        <!-- 实验文案：论文指标确定后，请同步更新这里的基准结果概述。 -->
-        <p>We evaluate <strong class="accent-text">Kimodo-Policy</strong> on HumanoidArena and SIMPLE, which together test whole-body coordination, human–object interaction, articulated-scene interaction, navigation, and robustness to environment variation. On HumanoidArena, the policy reaches 69.51% overall success in single-task training; VLA-pretrained initialization reaches 72.14% in joint multi-task training and lowers average fall rate to 4.29%. On SIMPLE, the pretrained policy is competitive across ten tasks, reaching 100% on Close Door and 83% on Handover, with performance varying by task.</p>
+        <!-- 实验总览文案：基准或真机结果更新时，请同步修改本段指标。 -->
+        <p>We evaluate <strong class="accent-text">Kimodo-Policy</strong> from pre-training through simulation and physical-robot deployment. HumanoidArena measures language-conditioned whole-body control across human–object and human–scene interaction; SIMPLE tests manipulation skills under progressively stronger visual and target-pose variation; and the real-world suite measures reliability on eight physical-robot tasks. The results below report the aggregate success rates and task-level comparisons from the paper.</p>
       </div>
       <div class="pretrain-section">
         <h3 class="title is-4">VLA policy pre-training.</h3>
@@ -155,11 +155,53 @@
           <figcaption><strong>VLA policy pre-training data.</strong> HIW-500, UniFoLM-WBT, and Humanoid Everyday provide varied humanoid tasks and observations.</figcaption>
         </figure>
       </div>
-      <!-- 基准配图：替换 humanoidarena.png 即可更新仿真基准结果图。 -->
-      <figure class="paper-figure">
-        <img width="1400" height="253" loading="lazy" decoding="async" src="../figure/humanoidarena.png" alt="HumanoidArena and SIMPLE benchmark results">
-        <figcaption><strong>Simulation benchmarks.</strong> Results cover seven HumanoidArena tasks and ten SIMPLE tasks spanning navigation, posture, and manipulation.</figcaption>
-      </figure>
+
+      <div class="evaluation-subsection">
+        <h3 class="title is-4">Simulation: HumanoidArena and SIMPLE.</h3>
+        <div class="content has-text-justified">
+          <!-- 仿真总览文案：更新 HumanoidArena 或 SIMPLE 表格时，请同步修改这里的说明。 -->
+          <p>We study simulation performance on two complementary benchmarks. HumanoidArena stresses long-horizon loco-manipulation, balance, navigation, and human–object or human–scene interaction, while SIMPLE isolates eight manipulation skills under L0–L2 visual, lighting, and target-pose randomization.</p>
+        </div>
+
+        <div class="evaluation-subsection">
+          <h4 class="title is-5">HumanoidArena.</h4>
+          <div class="content has-text-justified">
+            <!-- HumanoidArena 结果文案：替换表格图片或更新论文结果时，请在此同步数字。 -->
+            <p>In the single-task setting, direct fine-tuning reaches <strong class="result-highlight">69.51% overall success</strong>, exceeding the strongest baseline (DP, 60.0%) by 9.51 percentage points, while achieving a <strong class="result-highlight">4.29% average fall rate</strong>. With one policy jointly trained on all seven tasks, VLA-pretrained <strong class="accent-text">Kimodo-Policy</strong> reaches <strong class="result-highlight">72.14% overall success</strong> and the lowest <strong class="result-highlight">4.29% AFR</strong>, outperforming the strongest baseline (π<sub>0.5</sub>, 53.8%) by 18.33 percentage points. It also leads the mean success rates for both HOI (<strong class="result-highlight">56.11%</strong>) and HSI (<strong class="result-highlight">84.17%</strong>), with <strong class="result-highlight">95.0% on OpenDoor</strong>, <strong class="result-highlight">96.7% on SitSofa</strong>, and <strong class="result-highlight">90.0% on P&amp;Pbox</strong>.</p>
+          </div>
+          <!-- HumanoidArena 表格配图：手动替换 /data/local-data/data/code/yunhengwang/paper/web/figure/humanoidarena.png。 -->
+          <figure class="paper-figure result-figure">
+            <img width="1400" height="253" loading="lazy" decoding="async" src="../figure/humanoidarena.png" alt="HumanoidArena benchmark results">
+            <figcaption><strong>HumanoidArena results.</strong> Single-task and multi-task success rates, fall rates, and interaction-specific averages.</figcaption>
+          </figure>
+        </div>
+
+        <div class="evaluation-subsection">
+          <h4 class="title is-5">SIMPLE.</h4>
+          <div class="content has-text-justified">
+            <!-- SIMPLE 结果文案：任务或成功率更新时，请在此同步修改数字。 -->
+            <p>On SIMPLE, the VLA-pretrained policy is best or joint-best on <strong class="result-highlight">six of eight tasks</strong>. It leads Handover at <strong class="result-highlight">83%</strong>, Mobile P&amp;P at <strong class="result-highlight">70%</strong>, OpenOven at <strong class="result-highlight">57%</strong>, and OpenFaucet at <strong class="result-highlight">53%</strong>, and matches Ψ<sub>0</sub> at <strong class="result-highlight">100%</strong> on both CloseDoor and Push Office Chair. It remains competitive on XMoveBendPick (80%, second) and OpenTrashCan (63%, second), showing robustness across mobile manipulation, articulated-object interaction, and object pushing under distribution shifts.</p>
+          </div>
+          <!-- SIMPLE 表格配图：手动替换 /data/local-data/data/code/yunhengwang/paper/web/figure/simpletable.png。 -->
+          <figure class="paper-figure result-figure">
+            <img width="1279" height="343" loading="lazy" decoding="async" src="../figure/simpletable.png" alt="SIMPLE benchmark results">
+            <figcaption><strong>SIMPLE results.</strong> Aggregate success rates across the eight tasks and L0–L2 randomization levels.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="evaluation-subsection realworld-evaluation">
+        <h3 class="title is-4">Real-world evaluation.</h3>
+        <div class="content has-text-justified">
+          <!-- 真机结果文案：更新真实机器人表格时，请在此同步修改说明和指标。 -->
+          <p>We deploy <strong class="accent-text">Kimodo-Policy</strong> on a physical humanoid robot across eight tasks, with ten trials per task. The scratch-trained policy averages 45% success, compared with 31% for GR00T N1.6 and 35% for Ψ<sub>0</sub>. VLA policy pre-training raises the mean to <strong class="result-highlight">60%</strong>, a <strong class="result-highlight">15-point improvement</strong> over scratch, and improves seven of the eight tasks while matching scratch on Cart Pushing. The strongest task-level results are <strong class="result-highlight">90% on Punching Bag</strong>, <strong class="result-highlight">80% on Cushion Sitting</strong>, and <strong class="result-highlight">70% on Dual-Arm PNP</strong>.</p>
+        </div>
+        <!-- 真机结果表格配图：手动替换 /data/local-data/data/code/yunhengwang/paper/web/figure/realworldtable.png。 -->
+        <figure class="paper-figure result-figure">
+          <img width="1288" height="342" loading="lazy" decoding="async" src="../figure/realworldtable.png" alt="Real-world humanoid evaluation results">
+          <figcaption><strong>Real-world evaluation.</strong> Success rates across eight physical-robot tasks, including scratch and VLA-pretrained initialization.</figcaption>
+        </figure>
+      </div>
 
     </div>
   </section>

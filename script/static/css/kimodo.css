@@ -94,6 +94,7 @@ a:focus-visible, button:focus-visible, video:focus-visible {
   transform: translateX(-50%);
 }
 .accent-text, .tango-name { color: #294791 !important; font-weight: 800 !important; }
+.result-highlight { color: #c51f2f; font-weight: 800; }
 .section-nav a:hover, .section-nav a[aria-current] {
   color: #294791;
   border-bottom-color: #294791;
@@ -162,6 +163,12 @@ a:focus-visible, button:focus-visible, video:focus-visible {
 .deployment-figure img { max-height: 440px; }
 .method-transfer, .pretrain-section { margin-top: 3.5rem; }
 .method-transfer > .title, .pretrain-section > .title { margin-bottom: 1rem; }
+.evaluation-subsection { margin-top: 3.5rem; }
+.evaluation-subsection > .title { margin-bottom: 1rem; }
+.evaluation-subsection .evaluation-subsection { margin-top: 2.5rem; }
+.result-figure { margin-top: 1.6rem; }
+.result-figure img { width: 100%; height: auto; }
+.realworld-evaluation { margin-top: 4rem; }
 .site-footer { border-top-color: var(--line); }
 @media (max-width: 768px) {
   .cover { min-height: max(720px, calc(100svh - 58px)); }

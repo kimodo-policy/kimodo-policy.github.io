@@ -30,11 +30,13 @@ python3 -m http.server 8001
 | T2M 先验迁移标题、解读和配图 | `#method .method-transfer` | 正文直接编辑；图片为 `../figure/methodt2m.png` |
 | Experiment 基准介绍 | `#experiment` 开头正文 | 直接修改 HTML 文本和实验指标 |
 | Pre-training 标题、说明和数据图 | `#experiment .pretrain-section` | 正文直接修改；图片为 `../figure/pretraindata.png` |
-| HumanoidArena 与 SIMPLE 基准图 | `#experiment` 中 `humanoidarena.png` | `../figure/humanoidarena.png` |
+| 仿真总览与 HumanoidArena 结果 | `#experiment .evaluation-subsection` 中的 HumanoidArena 小节 | `../figure/humanoidarena.png`；正文和红色结果数字在同一小节 |
+| SIMPLE 结果 | `#experiment .evaluation-subsection` 中的 SIMPLE 小节 | `../figure/simpletable.png`；正文和红色结果数字在同一小节 |
+| 真机结果 | `#experiment .realworld-evaluation` | `../figure/realworldtable.png`；正文和红色结果数字在同一小节 |
 | Conclusion 标题与正文 | `#conclusion` | 直接修改该栏目中的标题和段落 |
 | 页面底部文字 | `.site-footer` | 直接修改 HTML 文本 |
 
-当前 `web` 版本的 Experiment 保留预训练介绍及 HumanoidArena/SIMPLE 基准结果图，已移除 HumanoidArena 任务卡片、真机任务卡片和部署配置图。其余保留图片附近有中文 HTML 注释，说明素材用途和替换方式。
+当前 `web` 版本的 Experiment 按“VLA policy pre-training → Simulation: HumanoidArena and SIMPLE → Real-world evaluation”排列。三张结果图和对应正文附近都有中文 HTML 注释，说明素材用途和替换方式；红色加粗数字使用 `.result-highlight`，仅标出论文中 best、joint-best 或聚合优势指标。
 
 ## 如何换图、调尺寸和位置
 
