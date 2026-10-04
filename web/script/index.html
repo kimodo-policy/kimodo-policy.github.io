@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kimodo-Policy transfers pretrained text-to-motion priors to humanoid vision-language-action for loco-manipulation.">
+  <meta name="keywords" content="Kimodo-Policy, humanoid, loco-manipulation, VLA, text-to-motion">
+  <title>Kimodo-Policy | Humanoid Loco-Manipulation</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/kimodo.css">
+  <link rel="icon" type="image/png" href="../figure/avator.png">
+  <script defer src="./static/js/index.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#overview">Skip to content</a>
+<main id="top">
+  <section class="cover" aria-labelledby="project-title">
+    <!-- 封面素材：最终封面视频准备好后，可在这里用视频元素替换 cover.png。 -->
+    <img class="cover-image" src="../figure/cover.png" alt="Unitree humanoid executing a whole-body loco-manipulation sequence">
+    <div class="cover-shade"></div>
+    <div class="cover-content">
+      <h1 id="project-title">Kimodo-<span class="cover-policy">Policy</span></h1>
+      <p class="cover-title">From Text-to-Motion Generators to<br class="desktop-break"> Humanoid Vision-Language-Action Policies</p>
+      <!-- 作者信息：可在这里修改姓名、单位和共同贡献标记。 -->
+      <div class="publication-authors">
+        <p class="author-list">
+          <span class="author">Yunheng Wang <sup>1 ★</sup></span>
+          <span class="author">Jiaxi Zhang <sup>1 ★</sup></span>
+          <span class="author">Wei Lu <sup>1 ★</sup></span>
+          <span class="author">Yuetong Fang <sup>1</sup></span>
+          <span class="author">Taowen Wang <sup>1</sup></span>
+          <span class="author">Yixiao Feng <sup>1</sup></span>
+        </p>
+        <p class="author-list">
+          <span class="author">Shuning Zhang <sup>1</sup></span>
+          <span class="author">Junzhe Xu <sup>1,2</sup></span>
+          <span class="author">Yichi Wang <sup>3</sup></span>
+          <span class="author">Zizhao Yuan <sup>1</sup></span>
+          <span class="author">Kailun Huang <sup>1</sup></span>
+        </p>
+        <p class="author-list">
+          <span class="author">Lusong Li <sup>2</sup></span>
+          <span class="author">Mingqian Zhou <sup>4</sup></span>
+          <span class="author">Zecui Zeng <sup>2 †</sup></span>
+          <span class="author">Renjing Xu <sup>1 †</sup></span>
+        </p>
+      </div>
+      <p class="affiliation-list">
+        <span class="affiliation"><sup>1</sup> HKUST(GZ)</span>
+        <span class="affiliation"><sup>2</sup> JD Explore Academy</span>
+        <span class="affiliation"><sup>3</sup> BJUT</span>
+        <span class="affiliation"><sup>4</sup> University of Cambridge</span>
+      </p>
+      <p class="author-notes">
+        <span class="author-note"><sup>★</sup> Equal contribution</span>
+        <span class="author-note"><sup>†</sup> Corresponding authors</span>
+      </p>
+      <!-- 论文与开源入口：arXiv 当前链接到本地论文 PDF；代码和模型发布后补上正式地址。 -->
+      <div class="hero-actions" aria-label="Project links">
+        <a class="project-button button-arxiv" href="https://github.com/kimodo-policy/kimodo-policy.github.io/releases/download/web-v1/main_arxiv.copy.pdf" target="_blank" rel="noopener noreferrer"><img class="brand-logo" src="../figure/brand/arxiv.svg" width="22" height="22" alt=""><span>arXiv</span></a>
+        <a class="project-button button-code" href="https://github.com/Yunheng-Wang/kimodo-policy/tree/main" target="_blank" rel="noopener noreferrer"><img class="brand-logo" src="../figure/brand/github.svg" width="22" height="22" alt=""><span>Code</span></a>
+        <a class="project-button button-huggingface" role="link" aria-disabled="true" data-link-placeholder><img class="brand-logo" src="../figure/brand/huggingface.svg" width="26" height="26" alt=""><span>Hugging Face</span></a>
+      </div>
+    </div>
+  </section>
+
+  <nav class="section-nav" aria-label="Page sections"><div class="section-nav-inner">
+    <a href="#overview">Overview</a><a href="#comparison">Comparison</a><a href="#method">Method</a><a href="#experiment">Experiment</a><a href="#conclusion">Conclusion</a>
+  </div></nav>
+
+  <section class="section overview-section" id="overview">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Whole-body intelligence for humanoid loco-manipulation.</h2>
+      <div class="content has-text-justified">
+        <!-- 总览文案：可根据项目主页需要单独修改这段简介。 -->
+        <p>Humanoid loco-manipulation requires a robot to interpret language and visual observations while coordinating navigation, balance, posture, and dexterous interaction over long horizons. These tightly coupled behaviors demand both coherent whole-body motion and continual correction from sensory feedback.</p>
+        <p>We introduce <strong class="accent-text">Kimodo-Policy</strong>, a visually grounded humanoid policy that adapts a pretrained Text-to-Motion diffusion model to closed-loop control. A structured motion prior supplies coordinated trajectories, visual conditioning grounds them in the current scene, and a root–body–hand hierarchy organizes actions according to their physical roles.</p>
+        <p>Across simulation and physical-robot evaluations, <strong class="accent-text">Kimodo-Policy</strong> achieves <strong class="result-highlight">72.14% overall success on multi-task HumanoidArena</strong>, reaches <strong class="result-highlight">best or joint-best performance on six of eight SIMPLE tasks</strong>, and obtains a <strong class="result-highlight">60% mean success rate across eight real-world tasks</strong>. These results show that transferring motion priors into a visually grounded whole-body policy improves both benchmark performance and deployment reliability.</p>
+      </div>
+      <!-- 总览配图：使用 overview1.png 展示任务覆盖、预训练数据规模与策略结构；替换图片时保持同一素材路径即可。 -->
+      <figure class="paper-figure">
+        <img width="3636" height="2375" loading="lazy" decoding="async" src="../figure/overview1.png" alt="Kimodo-Policy task results, pretraining data scale, and three-stage policy overview">
+        <figcaption><strong class="accent-text">Kimodo-Policy at a glance.</strong> The overview connects diverse loco-manipulation tasks and robot data to the structured root–body–hand policy.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section-band" id="comparison">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Loco-manipulation needs more than an action expert.</h2>
+      <div class="content has-text-justified">
+        <!-- 对比文案：在这里说明 loco-manipulation 面临的挑战及 Kimodo-Policy 的定位。 -->
+        <p>Humanoid policies must move the base while reaching, regulate posture to stay balanced, and coordinate contact-rich hand actions. Root motion, articulated body motion, and hand commands have different physical roles, yet errors in any one can propagate through the full action sequence.</p>
+        <p>Current VLM- and world-model-based approaches provide strong semantic and visual representations, but their action experts still need to learn embodiment-specific, temporally coherent whole-body behavior from robot data. Unified action spaces can entangle navigation, posture, and manipulation; partially decoupled designs often leave root and body generation coupled in one expert.</p>
+        <p><strong class="accent-text">Kimodo-Policy addresses both challenges:</strong> it transfers a pretrained text-to-motion prior to visually grounded control and explicitly structures prediction as root, body, and hand stages. The decomposition preserves coordination while giving each motion component a dedicated output.</p>
+      </div>
+      <!-- 对比配图：替换 overview.png 即可更新领域现状与方法对比图。 -->
+      <figure class="paper-figure">
+        <img width="3781" height="1512" loading="lazy" decoding="async" src="../figure/overview.png" alt="Comparison of humanoid policy architectures and Kimodo-Policy">
+        <figcaption><strong>From motion generation to grounded control.</strong> <strong class="accent-text">Kimodo-Policy</strong> combines a pretrained motion prior with visual grounding and structured whole-body action generation.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="method">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">A structured motion prior, grounded in the scene.</h2>
+      <div class="content has-text-justified">
+        <!-- 方法文案：当前内容由论文方法部分浓缩，可在这里继续编辑。 -->
+        <p><strong class="accent-text">Kimodo-Policy</strong> keeps the pretrained Kimodo root and body denoisers and DINOv3 image encoder frozen. Trainable visual ControlNet branches inject scene information into selected denoising layers through two complementary paths: motion-query cross-attention retrieves relevant image evidence, while a token-axis MLP maps spatial image features onto the future time horizon. Zero-initialized residual projections preserve the original motion prior at the start of adaptation.</p>
+        <p>The policy generates actions hierarchically. <strong>Root</strong> predicts global translation and heading; <strong>Body</strong> generates articulated whole-body motion conditioned on the predicted root; and a dedicated <strong>HandNet</strong> predicts bilateral open/close controls conditioned on visual features, current hand state, and future body features.</p>
+        <p>At each query, observed motion history constrains the prefix of the diffusion sequence. The policy denoises a future action chunk, sends tracker-compatible motion to the low-level controller, executes only a prefix, then replans from the updated image and state. This receding-horizon loop combines temporally coherent motion with continual visual and proprioceptive correction.</p>
+      </div>
+      <!-- 方法配图：更新方法架构图时替换 method.png。 -->
+      <figure class="paper-figure">
+        <img width="4261" height="1669" loading="lazy" decoding="async" src="../figure/method.png" alt="Kimodo-Policy root, body, and hand architecture">
+        <figcaption><strong class="accent-text">Kimodo-Policy architecture.</strong> Visual ControlNet branches condition frozen Kimodo denoisers; the predicted root conditions body generation, and future body features guide the dedicated hand diffusion head.</figcaption>
+      </figure>
+
+      <div class="method-transfer">
+        <h3 class="title is-4">Transferring text-to-motion priors to control.</h3>
+        <div class="content has-text-justified">
+          <!-- T2M 迁移解读：说明文本动作生成先验如何经视觉和运动历史条件化成为闭环策略。 -->
+          <p>A text-to-motion generator can already produce coherent whole-body behavior from an instruction such as “Sit on the sofa,” but text alone cannot determine where the robot is or how the scene is changing. <strong class="accent-text">Kimodo-Policy</strong> retains this pretrained motion structure, then conditions future motion on egocentric visual features and observed motion history.</p>
+          <p>At each replanning step, the observed history anchors the generated sequence to the robot’s measured state, while visual ControlNet residuals adapt the future to the current scene. The policy therefore turns sequence generation into motion completion under feedback: execute a short prefix, observe the result, and generate the next chunk.</p>
+        </div>
+        <!-- T2M 迁移配图：替换 methodt2m.png 可更新文本到动作先验迁移示意。 -->
+        <figure class="paper-figure">
+          <img width="4320" height="1655" loading="lazy" decoding="async" src="../figure/methodt2m.png" alt="Transfer of text-to-motion priors to closed-loop humanoid control">
+          <figcaption><strong>From text-conditioned motion to visually grounded control.</strong> The motion prior supplies coordinated behavior; image observations and state history ground and correct it online.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-band" id="experiment">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Simulation and real-world evaluation.</h2>
+      <div class="content has-text-justified">
+        <!-- 实验总览文案：基准或真机结果更新时，请同步修改本段指标。 -->
+        <p>We evaluate <strong class="accent-text">Kimodo-Policy</strong> from pre-training through simulation and physical-robot deployment. HumanoidArena measures language-conditioned whole-body control across human–object and human–scene interaction; SIMPLE tests manipulation skills under progressively stronger visual and target-pose variation; and the real-world suite measures reliability on eight physical-robot tasks. The results below report the aggregate success rates and task-level comparisons from the paper.</p>
+      </div>
+      <div class="pretrain-section">
+        <h3 class="title is-4">VLA policy pre-training.</h3>
+        <div class="content has-text-justified">
+          <!-- 预训练文案：数据组成、规模或训练配置变化时，在这里同步更新说明。 -->
+          <p>Before benchmark-specific post-training, <strong class="accent-text">Kimodo-Policy</strong> is trained on a diverse 419-hour humanoid corpus assembled from HIW-500, 14 available UniFoLM-WBT task subsets, and Humanoid Everyday. Each example pairs an egocentric image and language instruction with a 100-frame motion history and a 50-frame future action chunk at 30 Hz.</p>
+          <p>The pretrained Kimodo motion denoiser and DINOv3 visual encoder remain frozen. This stage trains the visual ControlNet and hand diffusion head to ground the motion prior in visual observations and language, providing a reusable initialization for downstream tasks.</p>
+        </div>
+        <!-- 预训练数据配图：替换 pretraindata.png 可更新数据集来源与组成示意。 -->
+        <figure class="paper-figure">
+          <img width="1386" height="601" loading="lazy" decoding="async" src="../figure/pretraindata.png" alt="Datasets used for Kimodo-Policy pretraining">
+          <figcaption><strong>VLA policy pre-training data.</strong> HIW-500, UniFoLM-WBT, and Humanoid Everyday provide varied humanoid tasks and observations.</figcaption>
+        </figure>
+      </div>
+
+      <div class="evaluation-subsection">
+        <h3 class="title is-4">Simulation: HumanoidArena and SIMPLE.</h3>
+        <div class="content has-text-justified">
+          <!-- 仿真总览文案：更新 HumanoidArena 或 SIMPLE 表格时，请同步修改这里的说明。 -->
+          <p>We study simulation performance on two complementary benchmarks. HumanoidArena stresses long-horizon loco-manipulation, balance, navigation, and human–object or human–scene interaction, while SIMPLE isolates eight manipulation skills under L0–L2 visual, lighting, and target-pose randomization.</p>
+        </div>
+
+        <div class="evaluation-subsection">
+          <h4 class="title is-5">HumanoidArena.</h4>
+          <div class="content has-text-justified">
+            <!-- HumanoidArena 结果文案：替换表格图片或更新论文结果时，请在此同步数字。 -->
+            <p>In the single-task setting, direct fine-tuning reaches <strong class="result-highlight">69.51% overall success</strong>, exceeding the strongest baseline (DP, 60.0%) by 9.51 percentage points, while achieving a <strong class="result-highlight">4.29% average fall rate</strong>. With one policy jointly trained on all seven tasks, VLA-pretrained <strong class="accent-text">Kimodo-Policy</strong> reaches <strong class="result-highlight">72.14% overall success</strong> and the lowest <strong class="result-highlight">4.29% AFR</strong>, outperforming the strongest baseline (π<sub>0.5</sub>, 53.8%) by 18.33 percentage points. It also leads the mean success rates for both HOI (<strong class="result-highlight">56.11%</strong>) and HSI (<strong class="result-highlight">84.17%</strong>), with <strong class="result-highlight">95.0% on OpenDoor</strong>, <strong class="result-highlight">96.7% on SitSofa</strong>, and <strong class="result-highlight">90.0% on P&amp;Pbox</strong>.</p>
+          </div>
+          <!-- HumanoidArena 表格配图：手动替换 /data/local-data/data/code/yunhengwang/paper/web/figure/humanoidarena.png。 -->
+          <figure class="paper-figure result-figure">
+            <img width="1400" height="253" loading="lazy" decoding="async" src="../figure/humanoidarena.png" alt="HumanoidArena benchmark results">
+            <figcaption><strong>HumanoidArena results.</strong> Single-task and multi-task success rates, fall rates, and interaction-specific averages.</figcaption>
+          </figure>
+        </div>
+
+        <div class="evaluation-subsection">
+          <h4 class="title is-5">SIMPLE.</h4>
+          <div class="content has-text-justified">
+            <!-- SIMPLE 结果文案：任务或成功率更新时，请在此同步修改数字。 -->
+            <p>On SIMPLE, the VLA-pretrained policy is best or joint-best on <strong class="result-highlight">six of eight tasks</strong>. It leads Handover at <strong class="result-highlight">83%</strong>, Mobile P&amp;P at <strong class="result-highlight">70%</strong>, OpenOven at <strong class="result-highlight">57%</strong>, and OpenFaucet at <strong class="result-highlight">53%</strong>, and matches Ψ<sub>0</sub> at <strong class="result-highlight">100%</strong> on both CloseDoor and Push Office Chair. It remains competitive on XMoveBendPick (80%, second) and OpenTrashCan (63%, second), showing robustness across mobile manipulation, articulated-object interaction, and object pushing under distribution shifts.</p>
+          </div>
+          <!-- SIMPLE 表格配图：手动替换 /data/local-data/data/code/yunhengwang/paper/web/figure/simpletable.png。 -->
+          <figure class="paper-figure result-figure">
+            <img width="1279" height="343" loading="lazy" decoding="async" src="../figure/simpletable.png" alt="SIMPLE benchmark results">
+            <figcaption><strong>SIMPLE results.</strong> Aggregate success rates across the eight tasks and L0–L2 randomization levels.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="evaluation-subsection realworld-evaluation">
+        <h3 class="title is-4">Real-world evaluation.</h3>
+        <div class="content has-text-justified">
+          <!-- 真机结果文案：更新真实机器人表格时，请在此同步修改说明和指标。 -->
+          <p>We deploy <strong class="accent-text">Kimodo-Policy</strong> on a physical humanoid robot across eight tasks, with ten trials per task. The scratch-trained policy averages 45% success, compared with 31% for GR00T N1.6 and 35% for Ψ<sub>0</sub>. VLA policy pre-training raises the mean to <strong class="result-highlight">60%</strong>, a <strong class="result-highlight">15-point improvement</strong> over scratch, and improves seven of the eight tasks while matching scratch on Cart Pushing. The strongest task-level results are <strong class="result-highlight">90% on Punching Bag</strong>, <strong class="result-highlight">80% on Cushion Sitting</strong>, and <strong class="result-highlight">70% on Dual-Arm PNP</strong>.</p>
+        </div>
+        <!-- 真机结果表格配图：手动替换 /data/local-data/data/code/yunhengwang/paper/web/figure/realworldtable.png。 -->
+        <figure class="paper-figure result-figure">
+          <img width="1288" height="342" loading="lazy" decoding="async" src="../figure/realworldtable.png" alt="Real-world humanoid evaluation results">
+          <figcaption><strong>Real-world evaluation.</strong> Success rates across eight physical-robot tasks, including scratch and VLA-pretrained initialization.</figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section conclusion-section" id="conclusion">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Conclusion</h2>
+      <div class="content has-text-justified">
+        <!-- 结论文案：论文的结论和指标更新后，请同步修改这里。 -->
+        <p><strong class="accent-text">Kimodo-Policy</strong> adapts a pretrained text-to-motion diffusion model into a visually grounded VLA policy for humanoid loco-manipulation. A root–body–hand hierarchy, dual-path visual conditioning, and motion-history constraints combine structured motion generation with receding-horizon feedback.</p>
+        <p>Results across simulation benchmarks and physical-robot tasks show that motion-generation priors can support coordinated whole-body behavior, while VLA policy pretraining improves deployment performance. These findings motivate further work on broader task coverage, more robust visual grounding, and efficient closed-loop control.</p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer"><div class="footer-inner"><a class="wordmark accent-text" href="#top">Kimodo-Policy</a><p>Project page for humanoid vision-language-action loco-manipulation.</p><a href="#top">Back to top ↑</a></div></footer>
+</body>
+</html>
