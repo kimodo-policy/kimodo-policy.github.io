@@ -1,17 +1,135 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=./script/">
-  <meta name="theme-color" content="#1e3aa7">
-  <title>Kimodo-Policy</title>
-  <link rel="icon" type="image/png" href="./figure/avator.png">
-  <link rel="canonical" href="./script/">
-  <script>window.location.replace(new URL('./script/', window.location.href));</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kimodo-Policy: From Text-to-Motion Generators to Humanoid Vision-Language-Action Policies</title>
+<meta name="description" content="Kimodo-Policy transfers pretrained text-to-motion priors to visually grounded, closed-loop humanoid control through root–body–hand action generation.">
+<meta name="theme-color" content="#ffffff"><link rel="stylesheet" href="styles.css">
+<link rel="preload" href="assets/inter-latin-bold.woff2" as="font" type="font/woff2" crossorigin>
 </head>
-<body>
-  <!-- 主页入口：将访问网站根目录的用户立即带到项目主页。 -->
-  <p>正在打开 Kimodo-Policy 项目主页……如果页面没有自动跳转，请<a href="./script/">点击这里</a>。</p>
-</body>
-</html>
+<body><header class="site-header">
+<nav class="sticky-nav" aria-label="Site navigation">
+<a class="nav-brand" href="#top"><span class="kimodo">Kimodo</span><span class="policy">-Policy</span></a>
+<div class="sticky-nav-links">
+<a href="#overview">Overview</a>
+<a href="#method">Method</a>
+<a href="#performance">Performance</a>
+<a href="#model">Model&amp;Datasets</a>
+<a href="#videos">Videos</a>
+</div></nav></header><main>
+<section id="top" class="hero" aria-labelledby="paper-title">
+<div class="hero-background" aria-hidden="true"><video id="cover-video" class="cover-player is-active" muted playsinline autoplay preload="auto" width="1920" height="1080" poster="assets/transportation-poster.jpg" tabindex="-1"><source src="assets/transportation.mp4" type="video/mp4"></video><video id="cover-video-next" class="cover-player" muted playsinline preload="auto" width="1920" height="1080" tabindex="-1"></video></div>
+<div class="hero-content">
+<h1 id="paper-title"><span class="paper-brand"><span class="kimodo">Kimodo</span><span class="policy">-Policy</span></span><span class="paper-title-detail">From Text-to-Motion Generators to<br class="desktop-break"> Humanoid Vision-Language-Action Policies</span></h1>
+<div class="hero-byline"><div class="authors" aria-label="Authors"><span>Yunheng Wang<sup>1,*</sup></span>
+<span>Jiaxi Zhang<sup>1,*</sup></span>
+<span>Wei Lu<sup>1,*</sup></span>
+<span>Yuetong Fang<sup>1</sup></span>
+<span>Taowen Wang<sup>1</sup></span>
+<span>Yixiao Feng<sup>1</sup></span>
+<span>Shuning Zhang<sup>1</sup></span>
+<span>Junzhe Xu<sup>1,2</sup></span>
+<span>Yichi Wang<sup>3</sup></span>
+<span>Zizhao Yuan<sup>1</sup></span>
+<span>Kailun Huang<sup>1</sup></span>
+<span>Lusong Li<sup>2</sup></span>
+<span>Mingqian Zhou<sup>4</sup></span>
+<span>Zecui Zeng<sup>2,†</sup></span>
+<span>Renjing Xu<sup>1,†</sup></span></div>
+<p class="affiliations"><span><sup>1</sup> HKUST (GZ)</span><span><sup>2</sup> JD Explore Academy</span><span><sup>3</sup> BJUT</span><span><sup>4</sup> University of Cambridge</span></p>
+<p class="author-notes"><span>* Equal contribution</span><span>† Co-corresponding authors</span></p></div>
+<div class="affiliation-logos"><img class="university-logo" src="封面视频/hksutgz.png" width="330" height="81" alt="The Hong Kong University of Science and Technology (Guangzhou)"><img class="lab-logo" src="封面视频/hcllab.png" width="532" height="532" alt="Humanoid Computing Lab"></div>
+<div class="hero-actions">
+<a class="button button-arxiv" href="https://github.com/kimodo-policy/kimodo-policy.github.io/releases/download/web-v1/main_arxiv.copy.pdf" target="_blank" rel="noopener noreferrer" title="Read the paper (PDF)"><img class="brand-logo" src="assets/arxiv.svg" alt="" width="22" height="22"> arXiv</a>
+<a class="button button-code" href="https://github.com/kimodo-policy/kimodo-policy" target="_blank" rel="noopener noreferrer"><img class="brand-logo" src="assets/github.svg" alt="" width="22" height="22"> Code</a>
+<a class="button button-huggingface" href="https://huggingface.co/YunhengWang/kimodo-policy" target="_blank" rel="noopener noreferrer"><img class="brand-logo" src="assets/huggingface.svg" alt="" width="26" height="26"> Hugging Face (Model)</a>
+<a class="button button-huggingface" href="https://huggingface.co/datasets/YunhengWang/kimodo-policy" target="_blank" rel="noopener noreferrer"><img class="brand-logo" src="assets/huggingface.svg" alt="" width="26" height="26"> Hugging Face (Datasets)</a>
+</div></div>
+<button class="video-toggle" type="button" aria-label="Pause background video" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button>
+</section>
+<article class="paper-content" aria-label="Kimodo-Policy research overview">
+<section id="overview" class="paper-section" aria-labelledby="overview-title">
+<h2 id="overview-title">From motion generation to humanoid control</h2>
+<div class="overview-visuals">
+<figure class="overview-motion" aria-label="From skeletal motion through articulated humanoid motion to real-world execution">
+<img class="overview-motion-sequence" src="figure/overview0.png" width="3615" height="1024" alt="A whole-body motion sequence progresses from a skeletal representation to a physical humanoid manipulating a banana." decoding="async">
+<img class="overview-motion-overlay" src="figure/overviewbackground.png" width="4373" height="1157" alt="" aria-hidden="true" decoding="async">
+</figure>
+<figure class="overview-diagram">
+<div class="overview-diagram-image"><img src="figure/overview.png" width="3620" height="1173" alt="Kimodo-Policy combines pretraining demonstrations, a text-to-motion backbone, and a root–body–hand architecture, with 678M total parameters and 92M trainable parameters." loading="lazy" decoding="async"></div>
+</figure>
+</div>
+<p><strong class="project-name"><span class="kimodo">Kimodo</span><span class="policy">-Policy</span></strong> turns pretrained text-to-motion generators into vision–language–action policies for humanoid robots. Given an egocentric image, a language instruction, and motion history, it predicts coordinated whole-body actions for closed-loop locomotion and manipulation.</p>
+<p>The central idea is to build on motion knowledge that already exists. A pretrained motion generator supplies inter-joint coordination and temporal structure; visual adaptation grounds that knowledge in the current scene. A dedicated <strong>root–body–hand</strong> architecture connects navigation, articulated movement, and object interaction.</p>
+<p>With <strong>678M total parameters and 92M trainable parameters</strong>, the policy is evaluated on HumanoidArena, SIMPLE, and eight physical-robot tasks. These experiments span walking, posture changes, single- and dual-arm manipulation, and contact-rich interaction.</p>
+</section>
+<section id="method" class="paper-section" aria-labelledby="method-title">
+<h2 id="method-title">A structured motion prior, grounded in the scene</h2>
+<figure class="method-diagram overview-diagram"><div class="overview-diagram-image"><img src="figure/method.png" alt="Kimodo-Policy architecture: frozen root and body denoisers, visual ControlNet branches with Dual-Path Fusion, and HandNet for coordinated hand control." loading="lazy" decoding="async"></div></figure>
+<p><strong class="project-name"><span class="kimodo">Kimodo</span><span class="policy">-Policy</span></strong> preserves the pretrained Kimodo root and body denoisers and learns visual conditioning through ControlNet branches. LLM2Vec encodes the instruction, frozen DINOv3 extracts image features, and a separate HandNet predicts synchronized left- and right-hand controls.</p>
+<h3>Root → Body → Hand</h3>
+<p>The root stage predicts translation and heading. Its trajectory conditions articulated body motion; future body features, visual observations, and the current hand state then guide HandNet. Each stage has a dedicated prediction objective, while explicit forward conditioning preserves whole-body coordination.</p>
+<h3>Visual adaptation with Dual-Path Fusion</h3>
+<p>Motion-query cross-attention retrieves task-relevant image features, while a token-axis MLP maps spatial visual tokens to the future motion horizon. Zero-initialized projections inject these features into the frozen motion backbone, conditioning future predictions while leaving the observed history intact.</p>
+<h3>Predict, execute, observe, and replan</h3>
+<p>The policy treats each query as constrained motion completion. It predicts a 50-frame future at 30 Hz, executes a prefix, and replans from updated observations. Root and body predictions become references for the SONIC tracker, alongside hand commands. This closes the loop between motion generation and physical execution.</p>
+</section>
+<section id="performance" class="paper-section evaluation" aria-labelledby="performance-title">
+<h2 id="performance-title">Performance</h2>
+<p>We evaluate Kimodo-Policy on HumanoidArena, Simple, and real-world tasks, measuring success across locomotion, manipulation, and coordinated whole-body interaction.</p>
+<div class="eval-tabs" role="tablist" aria-label="Evaluation benchmark">
+<button id="eval-tab-arena" role="tab" aria-selected="true" aria-controls="eval-panel" data-benchmark="arena">HumanoidArena</button>
+<button id="eval-tab-simple" role="tab" aria-selected="false" aria-controls="eval-panel" tabindex="-1" data-benchmark="simple">Simple</button>
+<button id="eval-tab-real" role="tab" aria-selected="false" aria-controls="eval-panel" tabindex="-1" data-benchmark="real">RealWorld</button>
+</div>
+<div class="eval-panel" id="eval-panel" role="tabpanel" aria-labelledby="eval-tab-arena" tabindex="0">
+<div class="eval-story"><span class="eval-eyebrow" id="eval-eyebrow"></span>
+<label class="eval-setting" id="eval-setting">Training setting<select id="arena-setting"><option value="multi">Multi-task · Table 2</option><option value="single">Single-task · Table 1</option></select></label>
+<div class="eval-big"><span id="eval-value">72.14</span><span>%</span></div>
+<h3 id="eval-title"></h3><p id="eval-description"></p><div class="eval-footnote" id="eval-footnote"></div><a class="eval-video-link" href="#videos">Task demonstrations ↓</a></div>
+<div class="eval-chart"><div class="eval-chart-heading"><h3 id="eval-chart-title">Success rate by task</h3><span>0–100% · higher is better</span></div>
+<div id="eval-legend" class="eval-legend" role="group" aria-label="Toggle model results"></div><p class="eval-hint" id="eval-hint">Select a legend label to show or hide a model.</p>
+<div id="eval-radar-wrap"><svg id="eval-radar" viewBox="0 0 560 460" role="img" aria-label="Success rate by task; exact values in the following table"></svg></div><div id="eval-bars" hidden></div>
+</div></div>
+<div class="eval-comparison"><div class="eval-comparison-heading"><div><span class="eval-eyebrow">Task-wise comparison</span><h3>Kimodo-Policy and reported baselines</h3></div><span>Success rate (%)</span></div>
+<div class="eval-table-scroll" role="region" aria-label="Evaluation values; scroll horizontally for all tasks" tabindex="0"><table id="eval-table"><caption class="sr-only">Success rates reported in the Kimodo-Policy paper</caption><thead></thead><tbody></tbody></table></div><p id="eval-table-note"></p></div>
+</section>
+<section id="model" class="paper-section" aria-labelledby="model-title">
+<h2 id="model-title">Model&amp;Datasets</h2>
+<p>Explore our open-source models and datasets on Hugging Face.</p>
+<div class="resource-browser">
+<div class="resource-toolbar"><span class="resource-platform"><img src="assets/huggingface.svg" alt="" width="23" height="23"> Hugging Face</span>
+<div class="resource-toggle" role="tablist" aria-label="Open-source resources"><span class="resource-toggle-thumb" aria-hidden="true"></span><button type="button" id="resource-tab-model" role="tab" aria-selected="true" aria-controls="resource-panel" data-resource="model">Model</button><button type="button" id="resource-tab-datasets" role="tab" aria-selected="false" aria-controls="resource-panel" tabindex="-1" data-resource="datasets">Datasets</button></div></div>
+<div id="resource-panel" role="tabpanel" aria-labelledby="resource-tab-model" tabindex="0">
+<div class="resource-repo"><span class="resource-avatar" aria-hidden="true">YW</span><a id="resource-repo-link" href="https://huggingface.co/YunhengWang/kimodo-policy/tree/main" target="_blank" rel="noopener noreferrer"><span>YunhengWang / </span><strong>kimodo-policy</strong></a><span class="resource-type" id="resource-type">Model</span></div>
+<div class="resource-body"><div class="resource-tags" id="resource-tags"><span>Humanoid robotics</span><span>Vision–Language–Action</span><span>Model checkpoints</span></div><h3 id="resource-heading">Kimodo-Policy models</h3><p id="resource-description">Model checkpoints for Kimodo-Policy: from pretrained text-to-motion priors to visually grounded whole-body control.</p></div>
+<div class="resource-footer"><span><span class="resource-branch" aria-hidden="true">⑂</span> main</span><a id="resource-open" href="https://huggingface.co/YunhengWang/kimodo-policy/tree/main" target="_blank" rel="noopener noreferrer">Browse model files ↗</a></div>
+</div></div>
+<h3 id="datasets">Pretraining on diverse humanoid demonstrations</h3>
+<p>Our <strong>419-hour</strong> VLA pretraining corpus combines <strong>HIW-500</strong>, <strong>14 task-specific G1 subsets from UniFoLM-WBT</strong>, and <strong>Humanoid Everyday</strong>. We select the UniFoLM-WBT subsets available when the corpus was assembled, including main-camera-only variants where available. Together, these sources cover household manipulation, articulated-object interaction, and locomotion-integrated behaviors.</p>
+<figure class="pretrain-figure">
+<div class="pretrain-composition" aria-label="Pretraining dataset composition">
+<div class="pretrain-part pretrain-left" tabindex="0" role="img" aria-label="HIW-500: household task demonstrations"><img src="figure/pretrainleft.png" width="2439" height="1770" alt="" loading="lazy" decoding="async"></div>
+<div class="pretrain-part pretrain-middle" tabindex="0" role="img" aria-label="Dataset composition: 47.60 million frames and 37,248 episodes"><img src="figure/pretrainmiddle.png" width="2657" height="2162" alt="" loading="lazy" decoding="async"></div>
+<div class="pretrain-part pretrain-right" tabindex="0" role="img" aria-label="UniFoLM-WBT and Humanoid Everyday task demonstrations"><img src="figure/pretrainright.png" width="2719" height="1773" alt="" loading="lazy" decoding="async"></div>
+</div><figcaption>47.60M frames · 37,248 episodes across three humanoid data sources.</figcaption></figure>
+</section>
+<section id="videos" class="paper-section video-gallery" aria-labelledby="videos-title">
+<h2 id="videos-title">See coordinated whole-body behavior</h2>
+<p>Explore Kimodo-Policy in the real world, HumanoidArena, and Simple. These selected demonstrations show locomotion, whole-body coordination, and interaction across a range of tasks.</p>
+<div class="eval-tabs video-tabs" role="tablist" aria-label="Video benchmark">
+<button id="video-tab-real" type="button" role="tab" aria-selected="true" aria-controls="video-panel" data-video-set="real">real</button>
+<button id="video-tab-humanoidarena" type="button" role="tab" aria-selected="false" aria-controls="video-panel" tabindex="-1" data-video-set="humanoidarena">humanoidarena</button>
+<button id="video-tab-simple" type="button" role="tab" aria-selected="false" aria-controls="video-panel" tabindex="-1" data-video-set="simple">simple</button>
+</div>
+<p id="video-summary" class="video-summary" aria-live="polite"></p>
+<div id="video-panel" role="tabpanel" aria-labelledby="video-tab-real" tabindex="0"><div id="task-video-grid" class="task-video-grid"></div></div>
+<div id="real-deployment" class="real-deployment">
+<h3>Whole-body teleoperation and data collection</h3>
+<p>Built on and extended from the NVIDIA Isaac-GR00T data-preparation pipeline, our setup uses a <strong>PICO 4 Ultra headset and hand controllers</strong> with <strong>PICO body trackers</strong> to capture whole-body and lower-limb motion. The robot carries an <strong>Intel RealSense D435i</strong> camera and <strong>Dex3-1 dexterous hands</strong>. We collect <strong>25–30 demonstrations per task</strong> across eight real-world tasks and store them in a LeRobot v2.1-compatible format with Kimodo-specific motion and control fields.</p>
+<figure class="resource-figure overview-diagram"><div class="overview-diagram-image"><img src="figure/deploymentconfigandmotionprofiles.png" width="1087" height="384" alt="PICO-based whole-body teleoperation setup with D435i and Dex3-1 hands, alongside measured and commanded joint trajectories for Football Scoring and Banana Cabinet." loading="lazy" decoding="async"></div><figcaption>Teleoperation setup and representative motion profiles. Solid curves show measured joint positions; dashed curves show action commands.</figcaption></figure>
+</div>
+<noscript><p>Enable JavaScript to browse the video collections.</p></noscript>
+</section>
+</article>
+</main><script src="script.js"></script><script src="performance-data.js"></script><script src="performance.js"></script><script src="videos-data.js"></script><script src="videos.js"></script><script src="resources.js"></script></body></html>
