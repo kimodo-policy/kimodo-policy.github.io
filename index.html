@@ -65,7 +65,7 @@
 </section>
 <section id="method" class="paper-section" aria-labelledby="method-title">
 <h2 id="method-title">A structured motion prior, grounded in the scene</h2>
-<figure class="method-diagram overview-diagram"><div class="overview-diagram-image"><img data-src="figure/method.png" alt="Kimodo-Policy architecture: frozen root and body denoisers, visual ControlNet branches with Dual-Path Fusion, and HandNet for coordinated hand control." loading="lazy" decoding="async"></div></figure>
+<figure class="method-diagram overview-diagram"><div class="overview-diagram-image"><img data-src="figure/method.png?v=6cbe13e2" width="4264" height="1669" alt="Kimodo-Policy architecture: frozen root and body denoisers, visual ControlNet branches with Dual-Path Fusion, and HandNet for coordinated hand control." loading="lazy" decoding="async"></div></figure>
 <p><strong class="project-name"><span class="kimodo">Kimodo</span><span class="policy">-Policy</span></strong> preserves the pretrained Kimodo root and body denoisers and learns visual conditioning through ControlNet branches. LLM2Vec encodes the instruction, frozen DINOv3 extracts image features, and a separate HandNet predicts synchronized left- and right-hand controls.</p>
 <h3>Root → Body → Hand</h3>
 <p>The root stage predicts translation and heading. Its trajectory conditions articulated body motion; future body features, visual observations, and the current hand state then guide HandNet. Each stage has a dedicated prediction objective, while explicit forward conditioning preserves whole-body coordination.</p>
