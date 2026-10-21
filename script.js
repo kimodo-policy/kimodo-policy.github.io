@@ -18,6 +18,7 @@ function useLighterCover() {
   const video = currentVideo();
   const position = video.currentTime;
   video.addEventListener('loadedmetadata', () => { video.currentTime = position; syncPlayback(); }, {once:true});
+  delete video.dataset.started;
   video.src = coverSource(clipIndex);
   video.load();
   const standby = players[1-activePlayer];
@@ -39,7 +40,7 @@ function syncPlayback() {
   }
   if (shouldPlay()) {
     // Build a small reserve before starting or resuming after a network stall.
-    if (!video.paused || ahead >= 3 || (video.duration-video.currentTime < 3 && ahead > .01)) video.play().catch(updateButton);
+    if (!video.paused || ahead >= (video.dataset.started ? 3 : 2) || (video.duration-video.currentTime < 3 && ahead > .01)) video.play().catch(updateButton);
   }
   else players.forEach(player => player.pause());
   updateButton();
@@ -73,6 +74,7 @@ async function advancePlaylist() {
     next.classList.add('is-active');
     previous.classList.remove('is-active');
     previous.pause();
+    delete previous.dataset.started;
     previous.removeAttribute('src');
     previous.preload = 'none';
     previous.load();
@@ -92,7 +94,7 @@ players.forEach(player => {
     clearTimeout(fallbackTimer);
     fallbackTimer = setTimeout(useLighterCover, 2500);
   });
-  player.addEventListener('playing', () => clearTimeout(fallbackTimer));
+  player.addEventListener('playing', () => { player.dataset.started = 'true'; clearTimeout(fallbackTimer); });
   for (const event of ['progress', 'canplay']) player.addEventListener(event, () => {
     if (player === currentVideo() && player.paused) syncPlayback();
   });
