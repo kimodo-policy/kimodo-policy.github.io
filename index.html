@@ -18,7 +18,7 @@
 <a href="#videos">Videos</a>
 </div></nav></header><main>
 <section id="top" class="hero" aria-labelledby="paper-title">
-<div class="hero-background" aria-hidden="true"><video id="cover-video" class="cover-player is-active" muted playsinline autoplay preload="auto" width="1920" height="1080" poster="assets/transportation-poster.jpg" tabindex="-1"><source src="assets/transportation.mp4" type="video/mp4"></video><video id="cover-video-next" class="cover-player" muted playsinline preload="auto" width="1920" height="1080" tabindex="-1"></video></div>
+<div class="hero-background" aria-hidden="true"><video id="cover-video" class="cover-player is-active" muted playsinline preload="auto" width="1280" height="720" poster="assets/transportation-poster.jpg" tabindex="-1"></video><video id="cover-video-next" class="cover-player" muted playsinline preload="none" width="1280" height="720" tabindex="-1"></video></div>
 <div class="hero-content">
 <h1 id="paper-title"><span class="paper-brand"><span class="kimodo">Kimodo</span><span class="policy">-Policy</span></span><span class="paper-title-detail">From Text-to-Motion Generators to<br class="desktop-break"> Humanoid Vision-Language-Action Policies</span></h1>
 <div class="hero-byline"><div class="authors" aria-label="Authors"><span>Yunheng Wang<sup>1,*</sup></span>
@@ -52,11 +52,11 @@
 <h2 id="overview-title">From motion generation to humanoid control</h2>
 <div class="overview-visuals">
 <figure class="overview-motion" aria-label="From skeletal motion through articulated humanoid motion to real-world execution">
-<img class="overview-motion-sequence" src="figure/overview0.png" width="3615" height="1024" alt="A whole-body motion sequence progresses from a skeletal representation to a physical humanoid manipulating a banana." decoding="async">
-<img class="overview-motion-overlay" src="figure/overviewbackground.png" width="4373" height="1157" alt="" aria-hidden="true" decoding="async">
+<img class="overview-motion-sequence" data-src="figure/overview0.png" width="3615" height="1024" alt="A whole-body motion sequence progresses from a skeletal representation to a physical humanoid manipulating a banana." decoding="async">
+<img class="overview-motion-overlay" data-src="figure/overviewbackground.png" width="4373" height="1157" alt="" aria-hidden="true" decoding="async">
 </figure>
 <figure class="overview-diagram">
-<div class="overview-diagram-image"><img src="figure/overview.png" width="3620" height="1173" alt="Kimodo-Policy combines pretraining demonstrations, a text-to-motion backbone, and a root–body–hand architecture, with 678M total parameters and 92M trainable parameters." loading="lazy" decoding="async"></div>
+<div class="overview-diagram-image"><img data-src="figure/overview.png" width="3620" height="1173" alt="Kimodo-Policy combines pretraining demonstrations, a text-to-motion backbone, and a root–body–hand architecture, with 678M total parameters and 92M trainable parameters." loading="lazy" decoding="async"></div>
 </figure>
 </div>
 <p><strong class="project-name"><span class="kimodo">Kimodo</span><span class="policy">-Policy</span></strong> turns pretrained text-to-motion generators into vision–language–action policies for humanoid robots. Given an egocentric image, a language instruction, and motion history, it predicts coordinated whole-body actions for closed-loop locomotion and manipulation.</p>
@@ -65,7 +65,7 @@
 </section>
 <section id="method" class="paper-section" aria-labelledby="method-title">
 <h2 id="method-title">A structured motion prior, grounded in the scene</h2>
-<figure class="method-diagram overview-diagram"><div class="overview-diagram-image"><img src="figure/method.png" alt="Kimodo-Policy architecture: frozen root and body denoisers, visual ControlNet branches with Dual-Path Fusion, and HandNet for coordinated hand control." loading="lazy" decoding="async"></div></figure>
+<figure class="method-diagram overview-diagram"><div class="overview-diagram-image"><img data-src="figure/method.png" alt="Kimodo-Policy architecture: frozen root and body denoisers, visual ControlNet branches with Dual-Path Fusion, and HandNet for coordinated hand control." loading="lazy" decoding="async"></div></figure>
 <p><strong class="project-name"><span class="kimodo">Kimodo</span><span class="policy">-Policy</span></strong> preserves the pretrained Kimodo root and body denoisers and learns visual conditioning through ControlNet branches. LLM2Vec encodes the instruction, frozen DINOv3 extracts image features, and a separate HandNet predicts synchronized left- and right-hand controls.</p>
 <h3>Root → Body → Hand</h3>
 <p>The root stage predicts translation and heading. Its trajectory conditions articulated body motion; future body features, visual observations, and the current hand state then guide HandNet. Each stage has a dedicated prediction objective, while explicit forward conditioning preserves whole-body coordination.</p>
@@ -109,9 +109,9 @@
 <p>Our <strong>419-hour</strong> VLA pretraining corpus combines <strong>HIW-500</strong>, <strong>14 task-specific G1 subsets from UniFoLM-WBT</strong>, and <strong>Humanoid Everyday</strong>. We select the UniFoLM-WBT subsets available when the corpus was assembled, including main-camera-only variants where available. Together, these sources cover household manipulation, articulated-object interaction, and locomotion-integrated behaviors.</p>
 <figure class="pretrain-figure">
 <div class="pretrain-composition" aria-label="Pretraining dataset composition">
-<div class="pretrain-part pretrain-left" tabindex="0" role="img" aria-label="HIW-500: household task demonstrations"><img src="figure/pretrainleft.png" width="2439" height="1770" alt="" loading="lazy" decoding="async"></div>
-<div class="pretrain-part pretrain-middle" tabindex="0" role="img" aria-label="Dataset composition: 47.60 million frames and 37,248 episodes"><img src="figure/pretrainmiddle.png" width="2657" height="2162" alt="" loading="lazy" decoding="async"></div>
-<div class="pretrain-part pretrain-right" tabindex="0" role="img" aria-label="UniFoLM-WBT and Humanoid Everyday task demonstrations"><img src="figure/pretrainright.png" width="2719" height="1773" alt="" loading="lazy" decoding="async"></div>
+<div class="pretrain-part pretrain-left" tabindex="0" role="img" aria-label="HIW-500: household task demonstrations"><img data-src="figure/pretrainleft.png" width="2439" height="1770" alt="" loading="lazy" decoding="async"></div>
+<div class="pretrain-part pretrain-middle" tabindex="0" role="img" aria-label="Dataset composition: 47.60 million frames and 37,248 episodes"><img data-src="figure/pretrainmiddle.png" width="2657" height="2162" alt="" loading="lazy" decoding="async"></div>
+<div class="pretrain-part pretrain-right" tabindex="0" role="img" aria-label="UniFoLM-WBT and Humanoid Everyday task demonstrations"><img data-src="figure/pretrainright.png" width="2719" height="1773" alt="" loading="lazy" decoding="async"></div>
 </div><figcaption>47.60M frames · 37,248 episodes across three humanoid data sources.</figcaption></figure>
 </section>
 <section id="videos" class="paper-section video-gallery" aria-labelledby="videos-title">
@@ -127,7 +127,7 @@
 <div id="real-deployment" class="real-deployment">
 <h3>Whole-body teleoperation and data collection</h3>
 <p>Built on and extended from the NVIDIA Isaac-GR00T data-preparation pipeline, our setup uses a <strong>PICO 4 Ultra headset and hand controllers</strong> with <strong>PICO body trackers</strong> to capture whole-body and lower-limb motion. The robot carries an <strong>Intel RealSense D435i</strong> camera and <strong>Dex3-1 dexterous hands</strong>. We collect <strong>25–30 demonstrations per task</strong> across eight real-world tasks and store them in a LeRobot v2.1-compatible format with Kimodo-specific motion and control fields.</p>
-<figure class="resource-figure overview-diagram"><div class="overview-diagram-image"><img src="figure/deploymentconfigandmotionprofiles.png" width="1087" height="384" alt="PICO-based whole-body teleoperation setup with D435i and Dex3-1 hands, alongside measured and commanded joint trajectories for Football Scoring and Banana Cabinet." loading="lazy" decoding="async"></div><figcaption>Teleoperation setup and representative motion profiles. Solid curves show measured joint positions; dashed curves show action commands.</figcaption></figure>
+<figure class="resource-figure overview-diagram"><div class="overview-diagram-image"><img data-src="figure/deploymentconfigandmotionprofiles.png" width="1087" height="384" alt="PICO-based whole-body teleoperation setup with D435i and Dex3-1 hands, alongside measured and commanded joint trajectories for Football Scoring and Banana Cabinet." loading="lazy" decoding="async"></div><figcaption>Teleoperation setup and representative motion profiles. Solid curves show measured joint positions; dashed curves show action commands.</figcaption></figure>
 </div>
 <noscript><p>Enable JavaScript to browse the video collections.</p></noscript>
 </section>

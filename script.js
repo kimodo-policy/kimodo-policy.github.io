@@ -1,4 +1,7 @@
 const playlist = ['transportation', 'football', 'banana', 'boxing', 'pnp', 'sitting'];
+const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+let coverResolution = connection?.saveData || (connection?.downlink > 0 && connection.downlink < 3) || /(^|-)2g$|3g/.test(connection?.effectiveType || '') ? 480 : 720;
+const coverSource = index => `assets/cover/${playlist[index]}-${coverResolution}.mp4`;
 const players = [...document.querySelectorAll('.cover-player')];
 const toggle = document.querySelector('.video-toggle');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -8,6 +11,18 @@ let clipIndex = 0;
 let userPaused = reducedMotion.matches;
 let switching = false;
 let coverVisible = true;
+let fallbackTimer;
+function useLighterCover() {
+  if (coverResolution === 480 || !shouldPlay()) return;
+  coverResolution = 480;
+  const video = currentVideo();
+  const position = video.currentTime;
+  video.addEventListener('loadedmetadata', () => { video.currentTime = position; syncPlayback(); }, {once:true});
+  video.src = coverSource(clipIndex);
+  video.load();
+  const standby = players[1-activePlayer];
+  standby.removeAttribute('src'); standby.preload = 'none'; standby.load();
+}
 function currentVideo() { return players[activePlayer]; }
 function updateButton() {
   const paused = currentVideo().paused;
@@ -17,13 +32,31 @@ function updateButton() {
 }
 function shouldPlay() { return !userPaused && !document.hidden && coverVisible; }
 function syncPlayback() {
-  if (shouldPlay()) currentVideo().play().catch(updateButton);
+  const video = currentVideo();
+  let ahead = 0;
+  for (let i = 0; i < video.buffered.length; i++) {
+    if (video.buffered.start(i) <= video.currentTime && video.buffered.end(i) >= video.currentTime) ahead = video.buffered.end(i)-video.currentTime;
+  }
+  if (shouldPlay()) {
+    // Build a small reserve before starting or resuming after a network stall.
+    if (!video.paused || ahead >= 3 || (video.duration-video.currentTime < 3 && ahead > .01)) video.play().catch(updateButton);
+  }
   else players.forEach(player => player.pause());
   updateButton();
 }
-function prepareNext() {
+function prepareNext(force = false) {
+  const current = currentVideo();
   const next = players[1 - activePlayer];
-  next.src = `assets/${playlist[(clipIndex + 1) % playlist.length]}.mp4`;
+  const source = coverSource((clipIndex + 1) % playlist.length);
+  if (next.getAttribute('src') === source) return;
+  // Let the visible clip build a buffer before fetching the next one.
+  let ahead = 0;
+  for (let i = 0; i < current.buffered.length; i++) {
+    if (current.buffered.start(i) <= current.currentTime && current.buffered.end(i) >= current.currentTime) ahead = current.buffered.end(i) - current.currentTime;
+  }
+  if (!force && (!shouldPlay() || current.currentTime < 2 || (ahead < 6 && current.duration-current.currentTime > 8))) return;
+  next.preload = 'auto';
+  next.src = source;
   next.load();
 }
 async function advancePlaylist() {
@@ -31,6 +64,7 @@ async function advancePlaylist() {
   switching = true;
   const previous = currentVideo();
   const next = players[1 - activePlayer];
+  prepareNext(true);
   try {
     // Keep the last frame visible until the next clip can actually play.
     if (shouldPlay()) await next.play();
@@ -39,6 +73,9 @@ async function advancePlaylist() {
     next.classList.add('is-active');
     previous.classList.remove('is-active');
     previous.pause();
+    previous.removeAttribute('src');
+    previous.preload = 'none';
+    previous.load();
     hero.dataset.clip = playlist[clipIndex];
     prepareNext();
     syncPlayback();
@@ -49,6 +86,17 @@ async function advancePlaylist() {
 }
 players.forEach(player => {
   player.muted = true;
+  player.addEventListener('waiting', () => {
+    if (player !== currentVideo()) return;
+    player.pause();
+    clearTimeout(fallbackTimer);
+    fallbackTimer = setTimeout(useLighterCover, 2500);
+  });
+  player.addEventListener('playing', () => clearTimeout(fallbackTimer));
+  for (const event of ['progress', 'canplay']) player.addEventListener(event, () => {
+    if (player === currentVideo() && player.paused) syncPlayback();
+  });
+  player.addEventListener('timeupdate', () => { if (player === currentVideo()) prepareNext(); });
   player.addEventListener('ended', () => { if (player === currentVideo()) advancePlaylist(); });
   player.addEventListener('play', updateButton);
   player.addEventListener('pause', updateButton);
@@ -65,7 +113,8 @@ new IntersectionObserver(entries => {
   syncPlayback();
 }, {threshold:0}).observe(hero);
 hero.dataset.clip = playlist[0];
-prepareNext();
+currentVideo().src = coverSource(0);
+currentVideo().load();
 syncPlayback();
 
 const navigation = document.querySelector('.sticky-nav');
@@ -131,11 +180,23 @@ window.addEventListener('scrollend', finishNavigationJump);
 updateReadingPosition();
 
 // Replay on each viewport entry; reset only after the graphic leaves fully.
+// Load research images only near their section, rather than during cover playback.
+const imageLoader = new IntersectionObserver(entries => {
+  entries.forEach(({target: img, isIntersecting}) => {
+    if (!isIntersecting) return;
+    img.src = img.dataset.src;
+    imageLoader.unobserve(img);
+  });
+}, {rootMargin:'200px'});
+document.querySelectorAll('img[data-src]').forEach(img => imageLoader.observe(img));
 const overviewMotion = document.querySelector('.overview-motion');
 async function setupOverviewReveal() {
   if (!overviewMotion || !('IntersectionObserver' in window)) return;
   try {
-    await Promise.all([...overviewMotion.querySelectorAll('img')].map(img => img.decode()));
+    await Promise.all([...overviewMotion.querySelectorAll('img')].map(img => new Promise(resolve => {
+      if (img.complete && img.naturalWidth) resolve();
+      else { img.addEventListener('load', resolve, {once:true}); img.addEventListener('error', resolve, {once:true}); }
+    })));
   } catch { return; }
   overviewMotion.classList.add('reveal-ready');
   let visible = false;

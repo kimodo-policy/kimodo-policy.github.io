@@ -11,7 +11,7 @@
     entries.forEach(({target: video, isIntersecting}) => {
       if (isIntersecting) {
         inView.add(video);
-        if (!video.getAttribute('src')) { video.src = video.dataset.src; video.load(); }
+        if (!video.getAttribute('src')) { video.poster = video.dataset.poster; video.src = video.dataset.src; video.load(); }
         play(video);
       } else { inView.delete(video); video.pause(); }
     });
@@ -39,7 +39,7 @@
       const frame = document.createElement('div'); frame.className = 'task-video-frame';
       const video = document.createElement('video');
       video.muted = true; video.defaultMuted = true; video.loop = true; video.playsInline = true;
-      video.controls = true; video.preload = 'none'; video.poster = clip.poster;
+      video.controls = true; video.preload = 'none'; video.dataset.poster = clip.poster;
       video.dataset.src = clip.src; video.setAttribute('aria-label', `${clip.title}${clip.detail ? ' · '+clip.detail : ''}`);
       const tag = document.createElement('span'); tag.className = 'task-video-tag'; tag.textContent = clip.tag;
       const error = document.createElement('a'); error.className = 'task-video-error'; error.href = clip.src;

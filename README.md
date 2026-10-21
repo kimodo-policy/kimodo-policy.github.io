@@ -76,3 +76,9 @@ Performance 使用 performance-data.js 中的论文 Tables 1–3 / Figure 11 数
 - Simple 雷达图展示全部 10 个策略。保留源数据中的 null，在渲染时将未报告任务补为 0（表中标为 0*），八任务均值也按补零后计算，并注明这是展示约定而非实测失败。
 - 预训练图改用 pretrainleft / pretrainmiddle / pretrainright.png 三层无边框组合，各区域悬停或键盘聚焦时放大 1.2 倍。
 - Overview 和 Method 正文项目名使用标题同款 Kimodo #76B900、-Policy #6E89BC。
+
+## 封面播放优化
+
+- 封面单独使用 `assets/cover/*-720.mp4`，30fps H.264，峰值码率 1.1 Mbps；总大小比旧 1080p 封面素材减少 80.5%。Videos 区域保留原有清晰度。
+- 省流量、2G/3G 或估计带宽低于 3 Mbps 时使用 480p / 600 kbps 峰值版本。持续缓冲超过 2.5 秒时也会降档。
+- 开始或缓冲后恢复前积累约 3 秒视频；下一段在当前片段已有缓冲后再预加载。正文插图滚动接近时才加载，避免与首屏竞争带宽。
