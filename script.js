@@ -1,7 +1,10 @@
 const playlist = ['transportation', 'football', 'banana', 'boxing', 'pnp', 'sitting'];
 const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-let coverResolution = connection?.saveData || (connection?.downlink > 0 && connection.downlink < 3) || /(^|-)2g$|3g/.test(connection?.effectiveType || '') ? 480 : 720;
-const coverSource = index => `assets/cover/${playlist[index]}-${coverResolution}.mp4`;
+const estimatedMbps = connection?.downlink || Infinity;
+const connectionType = connection?.effectiveType || '';
+let coverResolution = connection?.saveData || /(^|-)2g$/.test(connectionType) || estimatedMbps < 1.2 ? 480
+  : connectionType === '3g' || estimatedMbps < 4 ? 720 : 1080;
+const coverSource = index => `assets/cover/${playlist[index]}-${coverResolution}${coverResolution === 480 ? '' : '-v2'}.mp4`;
 const players = [...document.querySelectorAll('.cover-player')];
 const toggle = document.querySelector('.video-toggle');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -14,7 +17,7 @@ let coverVisible = true;
 let fallbackTimer;
 function useLighterCover() {
   if (coverResolution === 480 || !shouldPlay()) return;
-  coverResolution = 480;
+  coverResolution = coverResolution === 1080 ? 720 : 480;
   const video = currentVideo();
   const position = video.currentTime;
   video.addEventListener('loadedmetadata', () => { video.currentTime = position; syncPlayback(); }, {once:true});
