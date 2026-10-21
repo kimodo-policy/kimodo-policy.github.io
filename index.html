@@ -78,20 +78,23 @@
 <h2 id="performance-title">Performance</h2>
 <p>We evaluate Kimodo-Policy on HumanoidArena, Simple, and real-world tasks, measuring success across locomotion, manipulation, and coordinated whole-body interaction.</p>
 <div class="eval-tabs" role="tablist" aria-label="Evaluation benchmark">
-<button id="eval-tab-arena" role="tab" aria-selected="true" aria-controls="eval-panel" data-benchmark="arena">HumanoidArena</button>
-<button id="eval-tab-simple" role="tab" aria-selected="false" aria-controls="eval-panel" tabindex="-1" data-benchmark="simple">Simple</button>
-<button id="eval-tab-real" role="tab" aria-selected="false" aria-controls="eval-panel" tabindex="-1" data-benchmark="real">RealWorld</button>
+<button id="eval-tab-arena" role="tab" aria-selected="true" aria-controls="eval-panel" data-benchmark="arena"><span>HumanoidArena</span><small>Simulation · 7 tasks</small></button>
+<button id="eval-tab-simple" role="tab" aria-selected="false" aria-controls="eval-panel" tabindex="-1" data-benchmark="simple"><span>Simple</span><small>Simulation · 8 tasks</small></button>
+<button id="eval-tab-real" role="tab" aria-selected="false" aria-controls="eval-panel" tabindex="-1" data-benchmark="real"><span>RealWorld</span><small>Physical robot · 8 tasks</small></button>
 </div>
 <div class="eval-panel" id="eval-panel" role="tabpanel" aria-labelledby="eval-tab-arena" tabindex="0">
+<div class="eval-chart"><div class="eval-chart-heading"><h3 id="eval-chart-title">Success rate by task</h3><span>0–100% · higher is better</span></div>
+<div id="eval-radar-wrap"><svg id="eval-radar" viewBox="0 0 560 460" role="img" aria-label="Success rate by task; exact values in the following table"></svg></div><div id="eval-bars" hidden></div>
+<div class="eval-chart-caption"><span class="kimodo">Kimodo</span><span class="policy">-Policy</span><span>Across tasks. Across environments.</span></div>
+</div>
 <div class="eval-story"><span class="eval-eyebrow" id="eval-eyebrow"></span>
 <label class="eval-setting" id="eval-setting">Training setting<select id="arena-setting"><option value="multi">Multi-task · Table 2</option><option value="single">Single-task · Table 1</option></select></label>
-<div class="eval-big"><span id="eval-value">72.14</span><span>%</span></div>
-<h3 id="eval-title"></h3><p id="eval-description"></p><div class="eval-footnote" id="eval-footnote"></div><a class="eval-video-link" href="#videos">Task demonstrations ↓</a></div>
-<div class="eval-chart"><div class="eval-chart-heading"><h3 id="eval-chart-title">Success rate by task</h3><span>0–100% · higher is better</span></div>
-<div id="eval-legend" class="eval-legend" role="group" aria-label="Toggle model results"></div><p class="eval-hint" id="eval-hint">Select a legend label to show or hide a model.</p>
-<div id="eval-radar-wrap"><svg id="eval-radar" viewBox="0 0 560 460" role="img" aria-label="Success rate by task; exact values in the following table"></svg></div><div id="eval-bars" hidden></div>
+<div class="eval-result"><div class="eval-big"><span id="eval-value">72.14</span><span>%</span></div><span class="eval-result-label">Mean task<br>success rate</span></div>
+<h3 id="eval-title"></h3><p id="eval-description"></p><div class="eval-footnote" id="eval-footnote"></div>
+<div class="eval-models"><h4>Compare policies</h4><div id="eval-legend" class="eval-legend" role="group" aria-label="Toggle model results"></div><p class="eval-hint" id="eval-hint">Select a policy to show or hide its trace.</p></div>
+<a class="eval-video-link" href="#videos">Explore task demonstrations <span aria-hidden="true">↗</span></a>
 </div></div>
-<div class="eval-comparison"><div class="eval-comparison-heading"><div><span class="eval-eyebrow">Task-wise comparison</span><h3>Kimodo-Policy and reported baselines</h3></div><span>Success rate (%)</span></div>
+<div class="eval-comparison"><div class="eval-comparison-heading"><div><h3>Results, task by task</h3><p class="eval-table-subtitle">Kimodo-Policy and reported baselines</p></div><span>Success rate (%)</span></div>
 <div class="eval-table-scroll" role="region" aria-label="Evaluation values; scroll horizontally for all tasks" tabindex="0"><table id="eval-table"><caption class="sr-only">Success rates reported in the Kimodo-Policy paper</caption><thead></thead><tbody></tbody></table></div><p id="eval-table-note"></p></div>
 </section>
 <section id="model" class="paper-section" aria-labelledby="model-title">
