@@ -85,7 +85,7 @@
     }
     const table=$('eval-table'), head=table.tHead, body=table.tBodies[0];head.replaceChildren();body.replaceChildren();
     const tr=document.createElement('tr');['Policy',...data.tasks,'Mean'].forEach(t=>{const th=document.createElement('th');th.scope='col';th.textContent=t;tr.append(th);});head.append(tr);
-    const tableModels = benchmark === 'simple' ? [...data.models].sort((a,b) => (b.mean ?? -1) - (a.mean ?? -1)) : data.models;
+    const tableModels = benchmark === 'simple' ? [...data.models].sort((a,b) => (a.mean ?? -1) - (b.mean ?? -1)) : data.models;
     tableModels.forEach(m=>{
       const row=document.createElement('tr');if(m.name.startsWith('Kimodo'))row.className='eval-ours';
       const name=document.createElement('th');name.scope='row';name.textContent=m.name;row.append(name);
