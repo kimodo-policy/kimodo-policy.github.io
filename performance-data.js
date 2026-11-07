@@ -380,8 +380,8 @@ window.KIMODO_RESULTS = {
     "value": 72.14,
     "eyebrow": "HumanoidArena · Multi-task · SONIC",
     "title": "Mean success across seven tasks.",
-    "description": "One policy covers all seven tasks. VLA pretraining raises overall success from 67.63% to 72.14%, compared with 69.70% for GR00T N1.7. Kimodo-Policy* also has the highest HSI mean and the lowest AFR among methods reporting fall rates.",
-    "note": "Table 2 · All values are percentages. AFR = average fall rate (lower is better); HOI/HSI = human–object/human–scene interaction. HuGe variants: HuGe Table 4. Fast-WAM, LingBot-VA, GR00T N1.7, and GigaWorld-Policy: Language-Forcing Table 1; their HOI/HSI means are computed from reported task scores. Unreported AFR and deviations are left blank (—), not zero. Deviations and rounding are reproduced where available; the headline uses the paper’s more precise 72.14%. Both Kimodo variants retain the motion prior; * denotes our additional VLA pretraining. RTC disabled for our simulation evaluation.",
+    "description": "One policy covers all seven tasks. VLA pretraining raises overall success from 67.63% to 72.14%.",
+    "note": "SR: percentage of successful trials. AFR: average fall rate. HOI: mean success rate across the three human–object interaction tasks. HSI: mean success rate across the four human–scene interaction tasks. Overall: mean success rate across all seven tasks. All values are percentages; higher SR and lower AFR are better. ± indicates standard deviation.",
     "chart": "radar"
   },
   "single": {
