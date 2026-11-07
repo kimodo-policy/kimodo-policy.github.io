@@ -1,4 +1,6 @@
-// Sources: Kimodo-Policy paper Tables 1–3 and Figure 11.
+/* Source: arxiv/main_arxiv.pdf and table/*.tex, 2026-11-07.
+ * Null SIMPLE values are unreported; zero filling is a display-only choice.
+ * Both Kimodo variants use pretrained T2M; * adds VLA pretraining. */
 window.KIMODO_RESULTS = {
   "multi": {
     "tasks": [
@@ -14,9 +16,9 @@ window.KIMODO_RESULTS = {
       {
         "name": "ACT",
         "values": [
-          20,
-          30,
-          60,
+          20.0,
+          30.0,
+          60.0,
           58.3,
           21.7,
           58.3,
@@ -32,37 +34,47 @@ window.KIMODO_RESULTS = {
           2.4,
           10.3,
           4.7
-        ]
+        ],
+        "afr": 7.4,
+        "hoi": 36.7,
+        "hoiSd": 18.7,
+        "hsi": 41.7,
+        "hsiSd": 17.8
       },
       {
         "name": "DP",
         "values": [
           53.3,
-          35,
-          0,
+          35.0,
+          0.0,
           83.3,
           83.3,
           21.7,
-          50
+          50.0
         ],
         "mean": 46.7,
         "color": "#d29555",
         "sd": [
           6.2,
           10.8,
-          0,
+          0.0,
           6.2,
           4.7,
           30.6,
           14.7
-        ]
+        ],
+        "afr": 7.1,
+        "hoi": 29.4,
+        "hoiSd": 23.3,
+        "hsi": 59.6,
+        "hsiSd": 31.1
       },
       {
         "name": "FM",
         "values": [
           21.7,
-          20,
-          0,
+          20.0,
+          0.0,
           76.7,
           48.3,
           18.3,
@@ -73,23 +85,28 @@ window.KIMODO_RESULTS = {
         "sd": [
           8.5,
           7.1,
-          0,
+          0.0,
           2.4,
           6.2,
           25.9,
           6.2
-        ]
+        ],
+        "afr": 7.1,
+        "hoi": 13.9,
+        "hoiSd": 11.7,
+        "hsi": 45.4,
+        "hsiSd": 25.1
       },
       {
         "name": "π₀.₅",
         "values": [
-          10,
-          30,
-          75,
-          85,
-          70,
+          10.0,
+          30.0,
+          75.0,
+          85.0,
+          70.0,
           71.7,
-          35
+          35.0
         ],
         "mean": 53.8,
         "color": "#4fa9a0",
@@ -101,43 +118,53 @@ window.KIMODO_RESULTS = {
           14.7,
           12.5,
           4.1
-        ]
+        ],
+        "afr": 6.4,
+        "hoi": 38.3,
+        "hoiSd": 27.9,
+        "hsi": 65.4,
+        "hsiSd": 21.1
       },
       {
-        "name": "Kimodo (scratch)",
+        "name": "Kimodo-Policy",
         "values": [
-          35,
-          40,
-          80,
+          35.0,
+          40.0,
+          80.0,
           93.3,
           96.7,
           66.7,
           61.7
         ],
-        "mean": 67.63,
+        "mean": 67.6,
         "color": "#6E89BC",
         "sd": [
           7.1,
-          0,
+          0.0,
           4.1,
           6.2,
           4.7,
           4.7,
           6.2
-        ]
+        ],
+        "afr": 5.0,
+        "hoi": 51.7,
+        "hoiSd": 20.7,
+        "hsi": 79.6,
+        "hsiSd": 16.5
       },
       {
-        "name": "Kimodo (pretrained)",
+        "name": "Kimodo-Policy*",
         "values": [
-          40,
+          40.0,
           38.3,
-          90,
-          95,
+          90.0,
+          95.0,
           96.7,
           68.3,
           76.7
         ],
-        "mean": 72.14,
+        "mean": 72.1,
         "color": "#76B900",
         "sd": [
           4.1,
@@ -147,14 +174,19 @@ window.KIMODO_RESULTS = {
           4.7,
           10.3,
           8.5
-        ]
+        ],
+        "afr": 4.3,
+        "hoi": 56.1,
+        "hoiSd": 24.2,
+        "hsi": 84.2,
+        "hsiSd": 14.1
       }
     ],
     "value": 72.14,
     "eyebrow": "HumanoidArena · Multi-task · SONIC",
     "title": "Mean success across seven tasks.",
-    "description": "One policy learns all seven tasks. VLA pretraining improves overall success from 67.63% to 72.14%, with the lowest reported average fall rate (4.3%).",
-    "note": "Table 2 · RTC disabled. Task values are mean ± standard deviation (%). Overall values follow the paper; rounded task means may differ slightly.",
+    "description": "One policy covers all seven tasks. VLA pretraining improves overall success from 67.63% to 72.14%, with the lowest reported average fall rate (4.29%).",
+    "note": "Table 2 · All values are percentages. AFR = average fall rate (lower is better); HOI/HSI = human–object/human–scene interaction. Task and group results are mean ± standard deviation. Table rounding follows the paper; the headline uses the more precise 72.14% reported in the text. Both Kimodo variants retain the pretrained motion backbone; * denotes additional VLA pretraining. RTC disabled.",
     "chart": "radar"
   },
   "single": {
@@ -189,20 +221,25 @@ window.KIMODO_RESULTS = {
           8.5,
           6.2,
           2.4
-        ]
+        ],
+        "afr": 8.57,
+        "hoi": 30.56,
+        "hoiSd": 19.36,
+        "hsi": 60.42,
+        "hsiSd": 18.98
       },
       {
         "name": "DP",
         "values": [
-          45,
+          45.0,
           36.7,
-          75,
-          85,
+          75.0,
+          85.0,
           78.3,
           76.7,
           23.3
         ],
-        "mean": 60,
+        "mean": 60.0,
         "color": "#d29555",
         "sd": [
           10.8,
@@ -212,7 +249,12 @@ window.KIMODO_RESULTS = {
           14.3,
           2.4,
           6.2
-        ]
+        ],
+        "afr": 8.33,
+        "hoi": 52.22,
+        "hoiSd": 17.97,
+        "hsi": 65.83,
+        "hsiSd": 26.52
       },
       {
         "name": "FM",
@@ -220,9 +262,9 @@ window.KIMODO_RESULTS = {
           13.3,
           38.3,
           73.3,
-          70,
-          15,
-          70,
+          70.0,
+          15.0,
+          70.0,
           38.3
         ],
         "mean": 45.46,
@@ -235,17 +277,22 @@ window.KIMODO_RESULTS = {
           14.7,
           8.2,
           14.3
-        ]
+        ],
+        "afr": 5.71,
+        "hoi": 41.67,
+        "hoiSd": 25.06,
+        "hsi": 48.33,
+        "hsiSd": 26.94
       },
       {
         "name": "π₀.₅",
         "values": [
-          10,
+          10.0,
           43.3,
           71.7,
           66.7,
           73.3,
-          70,
+          70.0,
           23.3
         ],
         "mean": 51.19,
@@ -256,42 +303,52 @@ window.KIMODO_RESULTS = {
           11.8,
           6.2,
           2.4,
-          0,
+          0.0,
           6.2
-        ]
+        ],
+        "afr": 5.24,
+        "hoi": 41.67,
+        "hoiSd": 26.46,
+        "hsi": 58.33,
+        "hsiSd": 20.85
       },
       {
-        "name": "Kimodo (scratch)",
+        "name": "Kimodo-Policy",
         "values": [
           28.3,
-          40,
-          80,
-          90,
-          100,
+          40.0,
+          80.0,
+          90.0,
+          100.0,
           73.3,
-          75
+          75.0
         ],
         "mean": 69.51,
         "color": "#6E89BC",
         "sd": [
           6.2,
-          0,
+          0.0,
           4.1,
           4.1,
-          0,
+          0.0,
           13.1,
           10.8
-        ]
+        ],
+        "afr": 4.29,
+        "hoi": 49.44,
+        "hoiSd": 22.54,
+        "hsi": 84.58,
+        "hsiSd": 14.06
       },
       {
-        "name": "Kimodo (pretrained)",
+        "name": "Kimodo-Policy*",
         "values": [
           26.7,
           28.3,
           78.3,
           93.3,
           96.7,
-          70,
+          70.0,
           76.7
         ],
         "mean": 67.14,
@@ -304,14 +361,19 @@ window.KIMODO_RESULTS = {
           2.4,
           8.2,
           18.9
-        ]
+        ],
+        "afr": 4.29,
+        "hoi": 44.44,
+        "hoiSd": 24.66,
+        "hsi": 84.17,
+        "hsiSd": 15.25
       }
     ],
     "value": 69.51,
     "eyebrow": "HumanoidArena · Single-task · SONIC",
     "title": "Mean success across seven tasks.",
     "description": "Separate task-specific policies achieve 69.51% mean success without VLA pretraining. Pretraining improves selected tasks, while its aggregate is 67.14%.",
-    "note": "Table 1 · RTC disabled. Task values are mean ± standard deviation (%). Overall values follow the paper; rounded task means may differ slightly.",
+    "note": "Table 1 · All values are percentages. AFR = average fall rate (lower is better); HOI/HSI = human–object/human–scene interaction. Task and group results are mean ± standard deviation. Table rounding follows the paper. Both Kimodo variants retain the pretrained motion backbone; * denotes additional VLA pretraining. RTC disabled.",
     "chart": "radar"
   },
   "simple": {
@@ -382,10 +444,20 @@ window.KIMODO_RESULTS = {
             9,
             9
           ]
+        ],
+        "paperValues": [
+          80.0,
+          60.0,
+          93.0,
+          100.0,
+          53.0,
+          33.0,
+          100.0,
+          83.0
         ]
       },
       {
-        "name": "Kimodo (pretrained)",
+        "name": "Kimodo-Policy*",
         "values": [
           83.33333333333334,
           70.0,
@@ -440,6 +512,16 @@ window.KIMODO_RESULTS = {
             4,
             6
           ]
+        ],
+        "paperValues": [
+          83.0,
+          70.0,
+          80.0,
+          100.0,
+          57.0,
+          53.0,
+          100.0,
+          63.0
         ]
       },
       {
@@ -456,7 +538,39 @@ window.KIMODO_RESULTS = {
         ],
         "mean": null,
         "color": "#9ba5b1",
-        "sd": null
+        "sd": null,
+        "counts": [
+          [
+            4,
+            4,
+            6
+          ],
+          [
+            6,
+            5,
+            7
+          ],
+          [
+            6,
+            8,
+            8
+          ],
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "paperValues": [
+          47.0,
+          60.0,
+          73.0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       },
       {
         "name": "DreamZero",
@@ -472,7 +586,39 @@ window.KIMODO_RESULTS = {
         ],
         "mean": null,
         "color": "#9ba5b1",
-        "sd": null
+        "sd": null,
+        "counts": [
+          [
+            7,
+            8,
+            9
+          ],
+          [
+            5,
+            3,
+            3
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "paperValues": [
+          80.0,
+          37.0,
+          3.0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       },
       {
         "name": "π₀.₅",
@@ -488,7 +634,39 @@ window.KIMODO_RESULTS = {
         ],
         "mean": null,
         "color": "#9ba5b1",
-        "sd": null
+        "sd": null,
+        "counts": [
+          [
+            5,
+            4,
+            5
+          ],
+          [
+            3,
+            3,
+            3
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "paperValues": [
+          47.0,
+          30.0,
+          0.0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       },
       {
         "name": "EgoVLA",
@@ -504,7 +682,39 @@ window.KIMODO_RESULTS = {
         ],
         "mean": null,
         "color": "#9ba5b1",
-        "sd": null
+        "sd": null,
+        "counts": [
+          [
+            0,
+            4,
+            3
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            5,
+            4
+          ],
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "paperValues": [
+          23.0,
+          0.0,
+          40.0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       },
       {
         "name": "GR00T N1.6",
@@ -520,7 +730,39 @@ window.KIMODO_RESULTS = {
         ],
         "mean": null,
         "color": "#9ba5b1",
-        "sd": null
+        "sd": null,
+        "counts": [
+          [
+            1,
+            3,
+            3
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            4,
+            1
+          ],
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "paperValues": [
+          23.0,
+          0.0,
+          30.0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       },
       {
         "name": "InternVLA-M1",
@@ -536,7 +778,39 @@ window.KIMODO_RESULTS = {
         ],
         "mean": null,
         "color": "#9ba5b1",
-        "sd": null
+        "sd": null,
+        "counts": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            5,
+            7
+          ],
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "paperValues": [
+          0.0,
+          0.0,
+          50.0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       },
       {
         "name": "DP",
@@ -552,7 +826,39 @@ window.KIMODO_RESULTS = {
         ],
         "mean": null,
         "color": "#9ba5b1",
-        "sd": null
+        "sd": null,
+        "counts": [
+          [
+            3,
+            2,
+            4
+          ],
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "paperValues": [
+          30.0,
+          13.0,
+          0.0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       },
       {
         "name": "H-RDT",
@@ -568,14 +874,46 @@ window.KIMODO_RESULTS = {
         ],
         "mean": null,
         "color": "#9ba5b1",
-        "sd": null
+        "sd": null,
+        "counts": [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "paperValues": [
+          3.0,
+          0.0,
+          0.0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       }
     ],
     "value": 75.83333333333333,
     "eyebrow": "SIMPLE · L0–L2 · Single-task",
     "title": "Six of eight tasks best or joint-best.",
     "description": "Task-specific policies are evaluated under increasing visual, lighting, and target-pose variation. Kimodo-Policy completes 182 of 240 trials across the eight tasks.",
-    "note": "Table 3 · RTC disabled. Percentages are calculated from L0/L1/L2 success counts (30 trials per task). 75.83% is the calculated eight-task aggregate. Only Ψ₀ and Kimodo have all eight results; missing entries are not zero.",
+    "note": "Table 3 · L0/L1/L2: ten trials per level. Task rates in the paper are rounded to whole percentages; the radar and eight-task mean use exact success counts. RTC disabled.",
     "chart": "radar"
   },
   "real": {
@@ -623,7 +961,7 @@ window.KIMODO_RESULTS = {
         "sd": null
       },
       {
-        "name": "Kimodo (scratch)",
+        "name": "Kimodo-Policy",
         "values": [
           30,
           50,
@@ -639,7 +977,7 @@ window.KIMODO_RESULTS = {
         "sd": null
       },
       {
-        "name": "Kimodo (pretrained)",
+        "name": "Kimodo-Policy*",
         "values": [
           40,
           70,
@@ -658,7 +996,7 @@ window.KIMODO_RESULTS = {
     "value": 60,
     "eyebrow": "RealWorld · Eight tasks",
     "title": "Mean success on the physical robot.",
-    "description": "VLA pretraining raises mean success from 45% to 60%. It improves seven of eight tasks and matches the scratch-trained policy on Cart Pushing.",
+    "description": "VLA pretraining raises mean success from 45% to 60%. It improves seven of eight tasks and matches the policy without VLA pretraining on Cart Pushing.",
     "note": "Figure 11 · Ten trials per task and policy. RTC enabled for real-world deployment. Means follow the paper’s plotted summary (GR00T N1.6: 31%, rounded from task values).",
     "chart": "radar"
   }

@@ -56,7 +56,7 @@
         const imputed=model.values.map(value=>value==null);
         const values=model.values.map(value=>value??0);
         return {...model,values,imputed,color:colors[i],mean:values.reduce((sum,value)=>sum+value,0)/values.length};
-      }), note:'Table 3 · RTC disabled. Task percentages aggregate L0/L1/L2 (30 trials per tested task). For this visualization, unreported tasks are filled with 0* and included in the eight-task mean; these are not measured failures or paper-reported means. Kimodo: 182/240 trials (75.83%).'};
+      }), note:'Table 3 · Each cell shows the paper’s rounded success rate, with L0 / L1 / L2 success counts below (10 trials per level). Radar traces and eight-task means use exact counts. Unreported tasks are displayed as 0† and included in the mean, as a visualization convention; they are not measured failures or paper-reported means. Kimodo-Policy*: 182/240 trials (75.83%); Ψ₀: 181/240 (75.42%). * = VLA pretraining. RTC disabled.'};
     }
     hidden.clear();
     tabs.forEach(tab=>{const active=tab.dataset.benchmark===benchmark;tab.setAttribute('aria-selected',active);tab.tabIndex=active?0:-1; if(active)$('eval-panel').setAttribute('aria-labelledby',tab.id);});
@@ -84,19 +84,35 @@
       });
     }
     const table=$('eval-table'), head=table.tHead, body=table.tBodies[0];head.replaceChildren();body.replaceChildren();
-    const tr=document.createElement('tr');['Policy',...data.tasks,'Mean'].forEach(t=>{const th=document.createElement('th');th.scope='col';th.textContent=t;tr.append(th);});head.append(tr);
+    const columns = [{label:'Policy'}];
+    if(benchmark==='arena') columns.push({label:'AFR ↓',key:'afr',lower:true});
+    data.tasks.forEach((task,index)=>{
+      columns.push({label:task,index});
+      if(benchmark==='arena' && index===2)columns.push({label:'HOI avg ↑',key:'hoi',sdKey:'hoiSd'});
+      if(benchmark==='arena' && index===6)columns.push({label:'HSI avg ↑',key:'hsi',sdKey:'hsiSd'});
+    });
+    columns.push({label:benchmark==='arena'?'Overall ↑':'Mean ↑',key:'mean'});
+    const tr=document.createElement('tr');columns.forEach(c=>{const th=document.createElement('th');th.scope='col';th.textContent=c.label;tr.append(th);});head.append(tr);
+    table.caption.textContent=benchmark==='simple'?'SIMPLE success rates and L0 / L1 / L2 success counts; unreported tasks are filled with zero only for the website comparison.':'Success and fall rates reported in the Kimodo-Policy paper';
     const tableModels = benchmark === 'simple' ? [...data.models].sort((a,b) => (a.mean ?? -1) - (b.mean ?? -1)) : data.models;
     tableModels.forEach(m=>{
       const row=document.createElement('tr');if(m.name.startsWith('Kimodo'))row.className='eval-ours';
       const name=document.createElement('th');name.scope='row';name.textContent=m.name;row.append(name);
-      [...m.values,m.mean].forEach((value,i)=>{
-        const cell=document.createElement('td');cell.textContent=fmt(value);
-        if(m.imputed?.[i]){cell.textContent+='*';cell.title='Not reported; displayed as zero for this comparison.';}
-        if(i===data.tasks.length && m.imputed?.some(Boolean))cell.title='Eight-task mean with unreported tasks filled with zero.';
-        if(m.sd && i<m.values.length){const sd=document.createElement('small');sd.textContent=' ± '+fmt(m.sd[i]);cell.append(sd);}
-        if(m.counts && i<m.values.length)cell.title='L0 / L1 / L2: '+m.counts[i].map(v=>v+'/10').join(' · ');
-        const best=Math.max(...data.models.map(other=>i===data.tasks.length?(other.mean??-1):(other.values[i]??-1)));
-        if(value!=null && value===best)cell.classList.add('eval-best');row.append(cell);
+      columns.slice(1).forEach(column=>{
+        const i=column.index, value=column.key?m[column.key]:m.values[i];
+        const displayValue=benchmark==='simple' && i!=null && !m.imputed[i]?m.paperValues[i]:value;
+        const cell=document.createElement('td');cell.textContent=fmt(displayValue);
+        if(m.imputed?.[i]){cell.textContent+='†';cell.title='Not reported; displayed as zero for this comparison.';}
+        if(column.key==='mean' && m.imputed?.some(Boolean))cell.title='Eight-task mean with unreported tasks filled with zero.';
+        const sd=column.sdKey?m[column.sdKey]:(i!=null?m.sd?.[i]:null);
+        if(sd!=null){const small=document.createElement('small');small.textContent=' ± '+fmt(sd);cell.append(small);}
+        if(m.counts?.[i]){
+          const counts=document.createElement('small');counts.className='eval-counts';counts.textContent=m.counts[i].join(' / ');cell.append(counts);
+          cell.title='L0 / L1 / L2: '+m.counts[i].map(v=>v+'/10').join(' · ');
+        }
+        const candidates=data.models.map(other=>column.key?other[column.key]:other.values[i]).filter(v=>v!=null);
+        const best=column.lower?Math.min(...candidates):Math.max(...candidates);
+        if(value!=null && value===best && !m.imputed?.[i])cell.classList.add('eval-best');row.append(cell);
       }); body.append(row);
     }); animate();
   }

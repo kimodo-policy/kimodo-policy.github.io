@@ -4,11 +4,11 @@
 
 Kimodo-Policy adapts pretrained text-to-motion generators into vision–language–action policies for humanoid robots. Given an egocentric image, a language instruction, and motion history, it generates coordinated whole-body actions for closed-loop locomotion and manipulation.
 
-[Project Website](https://kimodo-policy.github.io/) · [Paper](https://github.com/kimodo-policy/kimodo-policy.github.io/releases/download/web-v1/main_arxiv.copy.pdf) · [Code](https://github.com/kimodo-policy/kimodo-policy) · [Models](https://huggingface.co/YunhengWang/kimodo-policy) · [Datasets](https://huggingface.co/datasets/YunhengWang/kimodo-policy)
+[Project Website](https://kimodo-policy.github.io/) · [Paper](https://github.com/kimodo-policy/kimodo-policy.github.io/releases/download/web-v1/main_arxiv-2026-11-07.pdf) · [Code](https://github.com/kimodo-policy/kimodo-policy) · [Models](https://huggingface.co/YunhengWang/kimodo-policy) · [Datasets](https://huggingface.co/datasets/YunhengWang/kimodo-policy)
 
 ## Overview
 
-The policy combines a frozen motion backbone with visual ControlNet branches and a dedicated HandNet. Its **root → body → hand** structure connects navigation, articulated body movement, and object interaction, while Dual-Path Fusion grounds motion generation in visual observations.
+**Kinematic Action Models (KAMs)** adapt diffusion-based text-to-motion backbones into visually grounded, closed-loop action generators. The policy combines a frozen motion backbone with visual ControlNet branches and a dedicated HandNet. Its **root → body → hand** structure connects navigation, articulated body movement, and object interaction, while Dual-Path Fusion grounds motion generation in visual observations.
 
 - **Motion priors:** reuse pretrained whole-body coordination and temporal structure.
 - **Efficient adaptation:** 678M total parameters, with 92M trainable parameters in the reported model.
@@ -19,7 +19,9 @@ The policy combines a frozen motion backbone with visual ControlNet branches and
 
 ## Results and Demonstrations
 
-The project website presents interactive benchmark comparisons and selected demonstrations of object transport, football, pick-and-place, sitting, and other whole-body behaviors. It also introduces the model architecture, pretraining data, and real-world teleoperation setup.
+The project website presents interactive benchmark comparisons and selected demonstrations of object transport, football, pick-and-place, sitting, and other whole-body behaviors. It also presents average fall rates, interaction-group results, SIMPLE L0–L2 success counts, motion-prior comparisons, scaling studies, and ablations, alongside the model architecture, pretraining data, and real-world teleoperation setup.
+
+The VLA-pretrained policy achieves 72.14% mean success on multi-task HumanoidArena and 60% on eight physical-robot tasks. On SIMPLE, it completes 182/240 trials (75.83%) and is best or joint-best on six of eight tasks. Both Kimodo variants retain a pretrained T2M backbone; the star denotes additional VLA pretraining. Results are evaluated with SONIC; transfer to other trackers remains unverified.
 
 [Explore the results](https://kimodo-policy.github.io/#performance) · [Watch the demonstrations](https://kimodo-policy.github.io/#videos)
 
