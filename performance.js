@@ -97,7 +97,11 @@
     columns.push({label:benchmark==='arena'?'Overall ↑':'Mean ↑',key:'mean'});
     const tr=document.createElement('tr');columns.forEach(c=>{const th=document.createElement('th');th.scope='col';th.textContent=c.label;tr.append(th);});head.append(tr);
     table.caption.textContent=benchmark==='simple'?'SIMPLE success rates and L0 / L1 / L2 success counts; unreported tasks are filled with zero only for the website comparison.':'Success and fall rates reported in the Kimodo-Policy paper';
-    const tableModels = benchmark === 'simple' ? [...data.models].sort((a,b) => (a.mean ?? -1) - (b.mean ?? -1)) : data.models;
+    // Sort baselines and our policies separately, keeping our rows at the bottom.
+    const tableModels = [...data.models].sort((a,b) => {
+      const group = Number(a.name.startsWith('Kimodo')) - Number(b.name.startsWith('Kimodo'));
+      return group || (a.mean ?? -1) - (b.mean ?? -1);
+    });
     tableModels.forEach(m=>{
       const row=document.createElement('tr');if(m.name.startsWith('Kimodo'))row.className='eval-ours';
       const name=document.createElement('th');name.scope='row';name.textContent=m.name;row.append(name);
