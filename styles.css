@@ -528,16 +528,9 @@ html{scroll-padding-top:0}
 #eval-table th:last-child,#eval-table td:last-child{position:sticky;right:0;background:#fff;box-shadow:-3px 0 8px -5px #aab7c5}
 #eval-table thead th:last-child{z-index:1}
 
-/* Quiet figure numbering and tighter section transitions. */
-.numbered-figure{position:relative;display:flow-root;min-width:0}
-.figure-number{position:absolute;right:calc(100% + 16px);top:0;white-space:nowrap;font-size:10px;font-weight:600;line-height:1.5;letter-spacing:1px;color:#6e89bc}
-.numbered-figure:has(>.paper-figure)>.figure-number{top:34px}
-.numbered-figure:has(>.overview-diagram)>.figure-number{top:28px}
-.numbered-figure:has(>.pretrain-figure)>.figure-number{top:32px}
-.paper-section>.numbered-figure:last-child>figure{margin-bottom:16px}
-@media(max-width:1199px){
-  .numbered-figure{padding-top:24px}
-  .numbered-figure>.figure-number{position:static;display:block;margin:0 0 8px;line-height:1.5}
-  .numbered-figure>figure{margin-top:0}
-  .overview-visuals>.numbered-figure:first-child{padding-top:0}
-}
+/* Figure numbers sit beside the caption, after the image. */
+.figure-number{flex:none;white-space:nowrap;font-size:10px;font-weight:600;line-height:1.65;letter-spacing:1px;color:#6e89bc}
+.paper-figure figcaption,.pretrain-figure figcaption{display:flex;align-items:baseline;gap:12px;max-width:850px;margin-left:auto;margin-right:auto;text-align:left}
+.figure-caption-text{min-width:0}
+.paper-section>.paper-figure:last-child{margin-bottom:16px}
+@media(max-width:650px){.paper-figure figcaption,.pretrain-figure figcaption{gap:8px}.figure-number{font-size:9px}}

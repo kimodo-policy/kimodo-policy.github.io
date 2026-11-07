@@ -42,6 +42,13 @@ window.KIMODO_VIDEOS = {
       "tag": "Real World",
       "poster": "assets/task-videos/real-6.jpg",
       "prompt": "Walk over to the large orange steps and sit down on them."
+    },
+    {
+      "title": "Cart Pushing",
+      "src": "assets/pushing.mp4",
+      "tag": "Real World",
+      "poster": "assets/task-videos/real-pushing.jpg",
+      "prompt": "Push the cart in front forward for a certain distance."
     }
   ],
   "humanoidarena": [

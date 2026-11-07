@@ -17,7 +17,7 @@
     });
   }, {threshold: .15});
   const summaries = {
-    real: '6 selected real-world demonstrations.',
+    real: `${window.KIMODO_VIDEOS.real.length} selected real-world demonstrations.`,
     humanoidarena: '7 tasks in HumanoidArena.',
     simple: '8 tasks in Simple · 3 selected clips per task.'
   };
