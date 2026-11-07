@@ -6,7 +6,10 @@
   const tabs = [...section.querySelectorAll('[role="tab"]')];
   let benchmark = 'arena', data, hidden = new Set(), frame, visible = false;
   const fmt = value => value == null ? '—' : Number(value.toFixed(2)).toString();
-  const complete = () => data.models.filter(m => m.values.every(v => v != null));
+  const plottedModels = () => data.models.filter(m =>
+    m.values.every(v => v != null) &&
+    !(benchmark === 'arena' && $('arena-setting').value === 'multi' && ['HuGe-OFT', 'HuGe-GR00T'].includes(m.name))
+  );
   const svgNode = (name, attrs, content) => {
     const el = document.createElementNS('http://www.w3.org/2000/svg', name);
     Object.entries(attrs).forEach(([k,v]) => el.setAttribute(k,v));
@@ -29,7 +32,7 @@
       lines.forEach((line,j)=>text.append(svgNode('tspan',{x:label[0],dy:j ? 16 : -(lines.length-1)*8},line)));
       svg.append(text);
     });
-    complete().forEach(m => {
+    plottedModels().forEach(m => {
       const group = svgNode('g',{'class':'eval-series','data-model':m.name,opacity:hidden.has(m.name)?0:1});
       group.append(svgNode('polygon',{points:m.values.map((v,i)=>point(i,v).join(',')).join(' '),fill:m.color,'fill-opacity':m.name.startsWith('Kimodo')?.11:.025,stroke:m.color,'stroke-width':m.name.startsWith('Kimodo')?2.8:1.7,'stroke-linejoin':'round'}));
       m.values.forEach((v,i)=>{ const p=point(i,v); const dot=svgNode('circle',{cx:p[0],cy:p[1],r:3,fill:m.color}); dot.append(svgNode('title',{},`${m.name} · ${data.tasks[i]}: ${fmt(v)}%${m.imputed?.[i] ? ' (unreported; displayed as zero)' : ''}`));group.append(dot); });
@@ -70,7 +73,7 @@
     $('eval-legend').hidden=!isRadar; $('eval-hint').hidden=!isRadar;
     $('eval-legend').replaceChildren();
     if(isRadar) {
-      complete().forEach(m=>{
+      plottedModels().forEach(m=>{
         const button=document.createElement('button');button.type='button';button.textContent=m.name;button.style.setProperty('--series-color',m.color);button.setAttribute('aria-pressed','true');
         button.addEventListener('click',()=>{if(hidden.has(m.name))hidden.delete(m.name);else hidden.add(m.name);button.setAttribute('aria-pressed',!hidden.has(m.name));section.querySelectorAll('.eval-series').forEach(g=>g.style.opacity=hidden.has(g.dataset.model)?0:1);});
         $('eval-legend').append(button);

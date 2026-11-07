@@ -63,7 +63,7 @@
 <p><strong class="project-name"><span class="kimodo">Kimodo</span><span class="policy">-Policy</span></strong> turns pretrained text-to-motion generators into vision–language–action policies for humanoid robots. Given an egocentric image, a language instruction, and motion history, it predicts coordinated whole-body actions for closed-loop locomotion and manipulation.</p>
 <p>We introduce <strong>Kinematic Action Models (KAMs)</strong>: adapting diffusion-based text-to-motion backbones into visually grounded action generators. Motion pretraining supplies priors over inter-joint coordination and temporal structure, so policy learning can focus on grounding established motion capabilities in the scene, instruction, and current robot state. Dedicated <strong>root–body–hand</strong> generators accommodate different motion scales and precision requirements while preserving explicit forward dependencies.</p>
 <p>With <strong>678M total parameters and 92M trainable parameters</strong>, the policy is evaluated on HumanoidArena, SIMPLE, and eight physical-robot tasks. These experiments span walking, posture changes, single- and dual-arm manipulation, and contact-rich interaction.</p>
-<figure class="paper-figure"><img data-src="figure/policy-architectures-20261107.webp" width="2600" height="1018" alt="Comparison of VLM, video-generation, and text-to-motion policy backbones, and unified, hybrid, and root–body–hand action generation." loading="lazy" decoding="async"><figcaption>A motion-generation foundation for humanoid control. Kimodo-Policy combines a pretrained T2M backbone with dedicated root, body, and hand generators.</figcaption></figure>
+<figure class="paper-figure"><img data-src="figure/intro.png?v=aa730034" width="3815" height="976" alt="Comparison of vision–language, video-generation, and motion-generation foundations for robot control, with action experts and motion trackers." loading="lazy" decoding="async"><figcaption>From semantic and visual-dynamics foundations to motion-generation priors: three routes to humanoid control.</figcaption></figure>
 </section>
 <section id="method" class="paper-section" aria-labelledby="method-title">
 <h2 id="method-title">A structured motion prior, grounded in the scene</h2>
@@ -138,4 +138,4 @@
 <noscript><p>Enable JavaScript to browse the video collections.</p></noscript>
 </section>
 </article>
-</main><script src="script.js"></script><script src="performance-data.js?v=20261107-r2"></script><script src="performance.js?v=20261107-r2"></script><script src="videos-data.js"></script><script src="videos.js"></script><script src="resources.js"></script></body></html>
+</main><script src="script.js"></script><script src="performance-data.js?v=20261107-r2"></script><script src="performance.js?v=20261107-r3"></script><script src="videos-data.js"></script><script src="videos.js"></script><script src="resources.js"></script></body></html>
