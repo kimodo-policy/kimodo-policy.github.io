@@ -1,6 +1,5 @@
-/* Source: arxiv/main_arxiv.pdf and table/*.tex, 2026-11-07.
- * Null SIMPLE values are unreported; zero filling is a display-only choice.
- * Both Kimodo variants use pretrained T2M; * adds VLA pretraining. */
+/* Multi-task source: tmp/cvpr2027-migration/source/table/arena_multi_task.tex, 2026-11-07 evening revision.
+ * Other benchmarks: arxiv/table/*.tex and main_arxiv.pdf. Null means unreported. */
 window.KIMODO_RESULTS = {
   "multi": {
     "tasks": [
@@ -15,6 +14,7 @@ window.KIMODO_RESULTS = {
     "models": [
       {
         "name": "ACT",
+        "color": "#9ba5b1",
         "values": [
           20.0,
           30.0,
@@ -24,8 +24,6 @@ window.KIMODO_RESULTS = {
           58.3,
           28.3
         ],
-        "mean": 39.5,
-        "color": "#9ba5b1",
         "sd": [
           4.1,
           4.1,
@@ -39,10 +37,12 @@ window.KIMODO_RESULTS = {
         "hoi": 36.7,
         "hoiSd": 18.7,
         "hsi": 41.7,
-        "hsiSd": 17.8
+        "hsiSd": 17.8,
+        "mean": 39.5
       },
       {
         "name": "DP",
+        "color": "#d29555",
         "values": [
           53.3,
           35.0,
@@ -52,8 +52,6 @@ window.KIMODO_RESULTS = {
           21.7,
           50.0
         ],
-        "mean": 46.7,
-        "color": "#d29555",
         "sd": [
           6.2,
           10.8,
@@ -67,10 +65,12 @@ window.KIMODO_RESULTS = {
         "hoi": 29.4,
         "hoiSd": 23.3,
         "hsi": 59.6,
-        "hsiSd": 31.1
+        "hsiSd": 31.1,
+        "mean": 46.7
       },
       {
         "name": "FM",
+        "color": "#987eb3",
         "values": [
           21.7,
           20.0,
@@ -80,8 +80,6 @@ window.KIMODO_RESULTS = {
           18.3,
           38.3
         ],
-        "mean": 31.9,
-        "color": "#987eb3",
         "sd": [
           8.5,
           7.1,
@@ -95,10 +93,12 @@ window.KIMODO_RESULTS = {
         "hoi": 13.9,
         "hoiSd": 11.7,
         "hsi": 45.4,
-        "hsiSd": 25.1
+        "hsiSd": 25.1,
+        "mean": 31.9
       },
       {
         "name": "π₀.₅",
+        "color": "#4fa9a0",
         "values": [
           10.0,
           30.0,
@@ -108,8 +108,6 @@ window.KIMODO_RESULTS = {
           71.7,
           35.0
         ],
-        "mean": 53.8,
-        "color": "#4fa9a0",
         "sd": [
           7.1,
           7.1,
@@ -123,10 +121,208 @@ window.KIMODO_RESULTS = {
         "hoi": 38.3,
         "hoiSd": 27.9,
         "hsi": 65.4,
-        "hsiSd": 21.1
+        "hsiSd": 21.1,
+        "mean": 53.8
+      },
+      {
+        "name": "HuGe-OFT",
+        "color": "#b77b91",
+        "values": [
+          48.33,
+          0.0,
+          53.33,
+          75.0,
+          55.0,
+          73.33,
+          73.33
+        ],
+        "sd": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "afr": null,
+        "hoi": 33.89,
+        "hoiSd": null,
+        "hsi": 69.17,
+        "hsiSd": null,
+        "mean": 54.05
+      },
+      {
+        "name": "HuGe-GR00T",
+        "color": "#5c91c4",
+        "values": [
+          71.67,
+          15.0,
+          81.67,
+          95.0,
+          78.33,
+          68.33,
+          56.67
+        ],
+        "sd": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "afr": null,
+        "hoi": 56.11,
+        "hoiSd": null,
+        "hsi": 74.58,
+        "hsiSd": null,
+        "mean": 66.67
+      },
+      {
+        "name": "HuGe-Pi",
+        "color": "#a89650",
+        "values": [
+          63.33,
+          11.67,
+          76.67,
+          88.33,
+          83.33,
+          68.33,
+          63.33
+        ],
+        "sd": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "afr": null,
+        "hoi": 50.56,
+        "hoiSd": null,
+        "hsi": 75.83,
+        "hsiSd": null,
+        "mean": 65.0
+      },
+      {
+        "name": "Fast-WAM",
+        "color": "#cf7955",
+        "values": [
+          46.25,
+          45.0,
+          73.75,
+          85.42,
+          74.58,
+          67.92,
+          35.0
+        ],
+        "sd": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "afr": null,
+        "hoi": 55.0,
+        "hoiSd": null,
+        "hsi": 65.73,
+        "hsiSd": null,
+        "mean": 61.13
+      },
+      {
+        "name": "LingBot-VA",
+        "color": "#64977b",
+        "values": [
+          51.67,
+          41.25,
+          77.92,
+          84.58,
+          77.08,
+          72.92,
+          52.08
+        ],
+        "sd": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "afr": null,
+        "hoi": 56.95,
+        "hoiSd": null,
+        "hsi": 71.67,
+        "hsiSd": null,
+        "mean": 65.36
+      },
+      {
+        "name": "GR00T N1.7",
+        "color": "#7966ad",
+        "values": [
+          63.75,
+          49.58,
+          73.33,
+          82.08,
+          76.67,
+          76.67,
+          65.83
+        ],
+        "sd": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "afr": null,
+        "hoi": 62.22,
+        "hoiSd": null,
+        "hsi": 75.31,
+        "hsiSd": null,
+        "mean": 69.7
+      },
+      {
+        "name": "GigaWorld-Policy",
+        "color": "#599eae",
+        "values": [
+          62.08,
+          52.5,
+          65.83,
+          90.83,
+          74.17,
+          73.33,
+          60.0
+        ],
+        "sd": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "afr": null,
+        "hoi": 60.14,
+        "hoiSd": null,
+        "hsi": 74.58,
+        "hsiSd": null,
+        "mean": 68.39
       },
       {
         "name": "Kimodo-Policy",
+        "color": "#6E89BC",
         "values": [
           35.0,
           40.0,
@@ -136,8 +332,6 @@ window.KIMODO_RESULTS = {
           66.7,
           61.7
         ],
-        "mean": 67.6,
-        "color": "#6E89BC",
         "sd": [
           7.1,
           0.0,
@@ -151,10 +345,12 @@ window.KIMODO_RESULTS = {
         "hoi": 51.7,
         "hoiSd": 20.7,
         "hsi": 79.6,
-        "hsiSd": 16.5
+        "hsiSd": 16.5,
+        "mean": 67.6
       },
       {
         "name": "Kimodo-Policy*",
+        "color": "#76B900",
         "values": [
           40.0,
           38.3,
@@ -164,8 +360,6 @@ window.KIMODO_RESULTS = {
           68.3,
           76.7
         ],
-        "mean": 72.1,
-        "color": "#76B900",
         "sd": [
           4.1,
           2.4,
@@ -179,14 +373,15 @@ window.KIMODO_RESULTS = {
         "hoi": 56.1,
         "hoiSd": 24.2,
         "hsi": 84.2,
-        "hsiSd": 14.1
+        "hsiSd": 14.1,
+        "mean": 72.1
       }
     ],
     "value": 72.14,
     "eyebrow": "HumanoidArena · Multi-task · SONIC",
     "title": "Mean success across seven tasks.",
-    "description": "One policy covers all seven tasks. VLA pretraining improves overall success from 67.63% to 72.14%, with the lowest reported average fall rate (4.29%).",
-    "note": "Table 2 · All values are percentages. AFR = average fall rate (lower is better); HOI/HSI = human–object/human–scene interaction. Task and group results are mean ± standard deviation. Table rounding follows the paper; the headline uses the more precise 72.14% reported in the text. Both Kimodo variants retain the pretrained motion backbone; * denotes additional VLA pretraining. RTC disabled.",
+    "description": "One policy covers all seven tasks. VLA pretraining raises overall success from 67.63% to 72.14%, compared with 69.70% for GR00T N1.7. Kimodo-Policy* also has the highest HSI mean and the lowest AFR among methods reporting fall rates.",
+    "note": "Table 2 · All values are percentages. AFR = average fall rate (lower is better); HOI/HSI = human–object/human–scene interaction. HuGe variants: HuGe Table 4. Fast-WAM, LingBot-VA, GR00T N1.7, and GigaWorld-Policy: Language-Forcing Table 1; their HOI/HSI means are computed from reported task scores. Unreported AFR and deviations are left blank (—), not zero. Deviations and rounding are reproduced where available; the headline uses the paper’s more precise 72.14%. Both Kimodo variants retain the motion prior; * denotes our additional VLA pretraining. RTC disabled for our simulation evaluation.",
     "chart": "radar"
   },
   "single": {

@@ -19,7 +19,7 @@ Kimodo-Policy adapts pretrained text-to-motion generators into vision–language
 
 ## Results and Demonstrations
 
-The project website presents interactive benchmark comparisons and selected demonstrations of object transport, football, pick-and-place, sitting, and other whole-body behaviors. It also presents average fall rates, interaction-group results, SIMPLE L0–L2 success counts, motion-prior comparisons, scaling studies, and ablations, alongside the model architecture, pretraining data, and real-world teleoperation setup.
+The project website presents interactive benchmark comparisons and selected demonstrations of object transport, football, pick-and-place, sitting, and other whole-body behaviors. It also presents average fall rates, interaction-group results, and SIMPLE L0–L2 success counts, alongside the model architecture, pretraining data, and real-world teleoperation setup. The multi-task HumanoidArena comparison includes HuGe variants, Fast-WAM, LingBot-VA, GR00T N1.7, and GigaWorld-Policy.
 
 The VLA-pretrained policy achieves 72.14% mean success on multi-task HumanoidArena and 60% on eight physical-robot tasks. On SIMPLE, it completes 182/240 trials (75.83%) and is best or joint-best on six of eight tasks. Both Kimodo variants retain a pretrained T2M backbone; the star denotes additional VLA pretraining. Results are evaluated with SONIC; transfer to other trackers remains unverified.
 
