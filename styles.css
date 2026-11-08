@@ -536,19 +536,18 @@ html{scroll-padding-top:0}
 @media(max-width:650px){.paper-figure figcaption,.pretrain-figure figcaption{gap:8px}.figure-number{font-size:9px}}
 
 
-/* Centered cover: a prominent wordmark above a wider paper title. */
+/* Centered cover: a prominent wordmark above a two-line paper title. */
 .hero-content{justify-content:center;gap:clamp(24px,3.8vh,42px)}
 #paper-title{width:100%;text-align:center}
 #paper-title .paper-brand{display:inline-flex;justify-content:center;width:fit-content;max-width:100%;font-size:clamp(72px,8.2vw,154px);letter-spacing:-.05em;line-height:1.08}
 #paper-title .paper-title-detail{margin-top:20px;font-size:clamp(26px,2.5vw,48px);line-height:1.28;text-wrap:balance}
-.paper-title-ending{white-space:nowrap}
+.paper-title-ending{display:block;white-space:nowrap}
 .authors{display:flex;flex-direction:column;align-items:center;justify-content:center;width:fit-content;max-width:100%;gap:7px;padding:0;font-size:clamp(14px,1.05vw,20px);line-height:1.65}
 .author-row{display:flex;flex-wrap:wrap;justify-content:center;gap:5px 24px}
 .author-row>span{white-space:nowrap;padding-right:.65em}
 .authors sup{left:1px}
 .affiliations{margin-top:14px;gap:4px 24px;font-size:clamp(13px,.95vw,18px)}
 .author-notes{margin-top:7px;gap:4px 22px}
-@media(min-width:1100px){#paper-title .paper-title-detail{white-space:nowrap}}
 @media(max-width:1099px){#paper-title .paper-title-detail{max-width:760px;margin-inline:auto}.paper-title-ending{display:block}.hero-content{gap:26px}}
 @media(max-width:760px){#paper-title .paper-brand{font-size:clamp(44px,11.5vw,80px)}#paper-title .paper-title-detail{font-size:clamp(20px,4.4vw,30px);margin-top:16px}.hero-content{gap:24px}.authors{font-size:13px;gap:7px}.author-row{gap:5px 15px}.affiliations{font-size:12px;gap:4px 16px;margin-top:12px}.author-notes{font-size:10px;margin-top:7px}}
 @media(max-width:480px){.authors{display:block}.author-row{display:contents}.author-row>span{display:inline-block;margin:3px 7px;padding-right:.65em}.paper-title-ending{white-space:normal}.hero-content{gap:22px}}
