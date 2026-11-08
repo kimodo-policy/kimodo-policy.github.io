@@ -1,6 +1,6 @@
 # Kimodo-Policy
 
-**From Text-to-Motion Generators to Humanoid Vision-Language-Action Policies**
+**Learning Kinematic Action Models for Humanoid Loco-Manipulation**
 
 Kimodo-Policy adapts pretrained text-to-motion generators into vision–language–action policies for humanoid robots. Given an egocentric image, a language instruction, and motion history, it generates coordinated whole-body actions for closed-loop locomotion and manipulation.
 
