@@ -2,9 +2,9 @@
 
 **Learning Kinematic Action Models for Humanoid Loco-Manipulation**
 
-Kimodo-Policy adapts pretrained text-to-motion generators into vision–language–action policies for humanoid robots. Given an egocentric image, a language instruction, and motion history, it generates coordinated whole-body actions for closed-loop locomotion and manipulation.
+Kimodo-Policy instantiates Kinematic Action Models (KAMs), using a pretrained motion generator as the foundation for humanoid action learning. A frozen motion backbone preserves temporal and cross-body coordination priors, while lightweight visual conditioning and execution feedback ground them in closed-loop loco-manipulation.
 
-[Project Website](https://kimodo-policy.github.io/) · [Paper](https://github.com/kimodo-policy/kimodo-policy.github.io/releases/download/web-v1/main_arxiv-2026-11-07.pdf) · [Code](https://github.com/kimodo-policy/kimodo-policy) · [Models](https://huggingface.co/YunhengWang/kimodo-policy) · [Datasets](https://huggingface.co/datasets/YunhengWang/kimodo-policy)
+[Project Website](https://kimodo-policy.github.io/) · [Paper](https://github.com/kimodo-policy/kimodo-policy.github.io/releases/download/web-v1/main_arxiv-2026-11-09.pdf) · [Code](https://github.com/kimodo-policy/kimodo-policy) · [Models](https://huggingface.co/YunhengWang/kimodo-policy) · [Datasets](https://huggingface.co/datasets/YunhengWang/kimodo-policy)
 
 ## Overview
 

@@ -511,18 +511,18 @@ window.KIMODO_RESULTS = {
         "name": "Kimodo-Policy",
         "values": [
           28.3,
-          40.0,
+          41.7,
           80.0,
           90.0,
           100.0,
           73.3,
           75.0
         ],
-        "mean": 69.51,
+        "mean": 69.76,
         "color": "#6E89BC",
         "sd": [
           6.2,
-          0.0,
+          2.4,
           4.1,
           4.1,
           0.0,
@@ -530,8 +530,8 @@ window.KIMODO_RESULTS = {
           10.8
         ],
         "afr": 4.29,
-        "hoi": 49.44,
-        "hoiSd": 22.54,
+        "hoi": 50.0,
+        "hoiSd": 22.36,
         "hsi": 84.58,
         "hsiSd": 14.06
       },
@@ -564,10 +564,10 @@ window.KIMODO_RESULTS = {
         "hsiSd": 15.25
       }
     ],
-    "value": 69.51,
+    "value": 69.76,
     "eyebrow": "HumanoidArena · Single-task · SONIC",
     "title": "Mean success across seven tasks.",
-    "description": "Separate task-specific policies achieve 69.51% mean success without VLA pretraining. Pretraining improves selected tasks, while its aggregate is 67.14%.",
+    "description": "Separate task-specific policies achieve 69.76% mean success without VLA pretraining. Pretraining improves selected tasks, while its aggregate is 67.14%.",
     "note": "Table 1 · All values are percentages. AFR = average fall rate (lower is better); HOI/HSI = human–object/human–scene interaction. Task and group results are mean ± standard deviation. Table rounding follows the paper. Both Kimodo variants retain the pretrained motion backbone; * denotes additional VLA pretraining. RTC disabled.",
     "chart": "radar"
   },
