@@ -462,7 +462,7 @@ html{scroll-padding-top:0}
 .pretrain-part:hover,.pretrain-part:focus-visible{z-index:3}
 .pretrain-part:hover img,.pretrain-part:focus-visible img{transform:scale(1.2)}
 .pretrain-part:focus-visible{outline:2px solid #76b900;border-radius:4px}
-.pretrain-figure figcaption{margin-top:28px;font-size:12px;line-height:1.6;color:#7b8797;text-align:center}
+.pretrain-figure figcaption{margin-top:12px;font-size:12px;line-height:1.6;color:#7b8797;text-align:center}
 @media(prefers-reduced-motion:reduce){.pretrain-part img{transition:none}}
 
 /* Kimodo evaluation: environment tabs, an open plot, and a compact result rail. */
@@ -523,7 +523,6 @@ html{scroll-padding-top:0}
 .paper-figure figcaption{margin:14px auto 0;max-width:850px;text-align:center;font-size:12px;line-height:1.65;color:#778598}
 #eval-table td .eval-counts{display:block;margin-top:5px;color:#758494;font-size:10px;font-weight:400}
 #eval-table thead th:nth-child(2){font-weight:650}
-.pretrain-figure figcaption a{font-size:inherit;color:#6e89bc}
 
 #eval-table th:last-child,#eval-table td:last-child{position:sticky;right:0;background:#fff;box-shadow:-3px 0 8px -5px #aab7c5}
 #eval-table thead th:last-child{z-index:1}
@@ -531,6 +530,7 @@ html{scroll-padding-top:0}
 /* Figure numbers sit beside the caption, after the image. */
 .figure-number{flex:none;white-space:nowrap;font-size:10px;font-weight:600;line-height:1.65;letter-spacing:1px;color:#6e89bc}
 .paper-figure figcaption,.pretrain-figure figcaption{display:flex;align-items:baseline;gap:12px;max-width:850px;margin-left:auto;margin-right:auto;text-align:left}
+.pretrain-figure figcaption{justify-content:center;max-width:none}
 .figure-caption-text{min-width:0}
 .paper-section>.paper-figure:last-child{margin-bottom:16px}
 @media(max-width:650px){.paper-figure figcaption,.pretrain-figure figcaption{gap:8px}.figure-number{font-size:9px}}
