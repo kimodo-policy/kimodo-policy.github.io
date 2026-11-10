@@ -1,5 +1,5 @@
-/* Multi-task source: tmp/cvpr2027-migration/source/table/arena_multi_task.tex, 2026-11-07 evening revision.
- * Other benchmarks: arxiv/table/*.tex and main_arxiv.pdf. Null means unreported. */
+// Results cross-checked against arXiv:2611.11554, Tables 1–3 and Figure 12.
+// Null denotes an unreported result, not a measured failure.
 window.KIMODO_RESULTS = {
   "multi": {
     "tasks": [
@@ -380,7 +380,7 @@ window.KIMODO_RESULTS = {
     "value": 72.14,
     "eyebrow": "HumanoidArena · Multi-task · SONIC",
     "title": "Mean success across seven tasks.",
-    "description": "One policy covers all seven tasks. VLA pretraining raises overall success from 67.63% to 72.14%.",
+    "description": "One policy covers all seven tasks. robot-interaction policy pretraining raises overall success from 67.63% to 72.14%.",
     "note": "SR: percentage of successful trials. AFR: average fall rate. HOI: mean success rate across the three human–object interaction tasks. HSI: mean success rate across the four human–scene interaction tasks. Overall: mean success rate across all seven tasks. All values are percentages; higher SR and lower AFR are better. ± indicates standard deviation.",
     "chart": "radar"
   },
@@ -567,8 +567,8 @@ window.KIMODO_RESULTS = {
     "value": 69.76,
     "eyebrow": "HumanoidArena · Single-task · SONIC",
     "title": "Mean success across seven tasks.",
-    "description": "Separate task-specific policies achieve 69.76% mean success without VLA pretraining. Pretraining improves selected tasks, while its aggregate is 67.14%.",
-    "note": "Table 1 · All values are percentages. AFR = average fall rate (lower is better); HOI/HSI = human–object/human–scene interaction. Task and group results are mean ± standard deviation. Table rounding follows the paper. Both Kimodo variants retain the pretrained motion backbone; * denotes additional VLA pretraining. RTC disabled.",
+    "description": "Separate task-specific policies achieve 69.76% mean success without robot-interaction policy pretraining. Pretraining improves selected tasks, while its aggregate is 67.14%.",
+    "note": "Table 1 · All values are percentages. AFR = average fall rate (lower is better); HOI/HSI = human–object/human–scene interaction. Task and group results are mean ± standard deviation. Table rounding follows the paper. Both Kimodo variants retain the pretrained motion backbone; * denotes additional robot-interaction policy pretraining. RTC disabled.",
     "chart": "radar"
   },
   "simple": {
@@ -725,13 +725,13 @@ window.KIMODO_RESULTS = {
           46.666666666666664,
           60.0,
           73.33333333333333,
-          null,
-          null,
-          null,
-          null,
-          null
+          100.0,
+          6.666666666666667,
+          3.3333333333333335,
+          96.66666666666667,
+          50.0
         ],
-        "mean": null,
+        "mean": 54.58333333333333,
         "color": "#9ba5b1",
         "sd": null,
         "counts": [
@@ -750,21 +750,41 @@ window.KIMODO_RESULTS = {
             8,
             8
           ],
-          null,
-          null,
-          null,
-          null,
-          null
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            9,
+            10,
+            10
+          ],
+          [
+            4,
+            4,
+            7
+          ]
         ],
         "paperValues": [
-          47.0,
-          60.0,
-          73.0,
-          null,
-          null,
-          null,
-          null,
-          null
+          47,
+          60,
+          73,
+          100,
+          7,
+          3,
+          97,
+          50
         ]
       },
       {
@@ -821,13 +841,13 @@ window.KIMODO_RESULTS = {
           46.666666666666664,
           30.0,
           0.0,
-          null,
-          null,
-          null,
-          null,
-          null
+          96.66666666666667,
+          43.333333333333336,
+          20.0,
+          86.66666666666667,
+          60.0
         ],
-        "mean": null,
+        "mean": 47.91666666666667,
         "color": "#9ba5b1",
         "sd": null,
         "counts": [
@@ -846,21 +866,41 @@ window.KIMODO_RESULTS = {
             0,
             0
           ],
-          null,
-          null,
-          null,
-          null,
-          null
+          [
+            10,
+            10,
+            9
+          ],
+          [
+            4,
+            3,
+            6
+          ],
+          [
+            4,
+            2,
+            0
+          ],
+          [
+            10,
+            10,
+            6
+          ],
+          [
+            7,
+            6,
+            5
+          ]
         ],
         "paperValues": [
-          47.0,
-          30.0,
-          0.0,
-          null,
-          null,
-          null,
-          null,
-          null
+          47,
+          30,
+          0,
+          97,
+          43,
+          20,
+          87,
+          60
         ]
       },
       {
@@ -869,13 +909,13 @@ window.KIMODO_RESULTS = {
           23.333333333333332,
           0.0,
           40.0,
-          null,
-          null,
-          null,
-          null,
-          null
+          93.33333333333333,
+          50.0,
+          0.0,
+          96.66666666666667,
+          40.0
         ],
-        "mean": null,
+        "mean": 42.916666666666664,
         "color": "#9ba5b1",
         "sd": null,
         "counts": [
@@ -894,21 +934,41 @@ window.KIMODO_RESULTS = {
             5,
             4
           ],
-          null,
-          null,
-          null,
-          null,
-          null
+          [
+            10,
+            8,
+            10
+          ],
+          [
+            5,
+            8,
+            2
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            9,
+            10
+          ],
+          [
+            3,
+            5,
+            4
+          ]
         ],
         "paperValues": [
-          23.0,
-          0.0,
-          40.0,
-          null,
-          null,
-          null,
-          null,
-          null
+          23,
+          0,
+          40,
+          93,
+          50,
+          0,
+          97,
+          40
         ]
       },
       {
@@ -965,13 +1025,13 @@ window.KIMODO_RESULTS = {
           0.0,
           0.0,
           50.0,
-          null,
-          null,
-          null,
-          null,
-          null
+          0.0,
+          73.33333333333333,
+          0.0,
+          20.0,
+          0.0
         ],
-        "mean": null,
+        "mean": 17.916666666666668,
         "color": "#9ba5b1",
         "sd": null,
         "counts": [
@@ -990,21 +1050,41 @@ window.KIMODO_RESULTS = {
             5,
             7
           ],
-          null,
-          null,
-          null,
-          null,
-          null
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            8,
+            6,
+            8
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            3,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
         ],
         "paperValues": [
-          0.0,
-          0.0,
-          50.0,
-          null,
-          null,
-          null,
-          null,
-          null
+          0,
+          0,
+          50,
+          0,
+          73,
+          0,
+          20,
+          0
         ]
       },
       {
@@ -1013,13 +1093,13 @@ window.KIMODO_RESULTS = {
           30.0,
           13.333333333333334,
           0.0,
-          null,
-          null,
-          null,
-          null,
-          null
+          100.0,
+          0.0,
+          36.666666666666664,
+          80.0,
+          60.0
         ],
-        "mean": null,
+        "mean": 40.0,
         "color": "#9ba5b1",
         "sd": null,
         "counts": [
@@ -1038,21 +1118,41 @@ window.KIMODO_RESULTS = {
             0,
             0
           ],
-          null,
-          null,
-          null,
-          null,
-          null
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            3,
+            6
+          ],
+          [
+            10,
+            6,
+            8
+          ],
+          [
+            4,
+            7,
+            7
+          ]
         ],
         "paperValues": [
-          30.0,
-          13.0,
-          0.0,
-          null,
-          null,
-          null,
-          null,
-          null
+          30,
+          13,
+          0,
+          100,
+          0,
+          37,
+          80,
+          60
         ]
       },
       {
@@ -1106,7 +1206,7 @@ window.KIMODO_RESULTS = {
     ],
     "value": 75.83333333333333,
     "eyebrow": "SIMPLE · L0–L2 · Single-task",
-    "title": "Six of eight tasks best or joint-best.",
+    "title": "Five of eight tasks best or joint-best.",
     "description": "Task-specific policies are evaluated under increasing visual, lighting, and target-pose variation. Kimodo-Policy completes 182 of 240 trials across the eight tasks.",
     "note": "Table 3 · L0/L1/L2: ten trials per level. Task rates in the paper are rounded to whole percentages; the radar and eight-task mean use exact success counts. RTC disabled.",
     "chart": "radar"
@@ -1191,8 +1291,8 @@ window.KIMODO_RESULTS = {
     "value": 60,
     "eyebrow": "RealWorld · Eight tasks",
     "title": "Mean success on the physical robot.",
-    "description": "VLA pretraining raises mean success from 45% to 60%. It improves seven of eight tasks and matches the policy without VLA pretraining on Cart Pushing.",
-    "note": "Figure 11 · Ten trials per task and policy. RTC enabled for real-world deployment. Means follow the paper’s plotted summary (GR00T N1.6: 31%, rounded from task values).",
+    "description": "robot-interaction policy pretraining raises mean success from 45% to 60%. It improves seven of eight tasks and matches the policy without robot-interaction policy pretraining on Cart Pushing.",
+    "note": "Figure 12 · Ten trials per task and policy. RTC enabled for real-world deployment. Means follow the paper’s plotted summary (GR00T N1.6: 31%, rounded from task values).",
     "chart": "radar"
   }
 };

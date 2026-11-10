@@ -58,8 +58,8 @@
       data={...data, models:data.models.map((model,i)=>{
         const imputed=model.values.map(value=>value==null);
         const values=model.values.map(value=>value??0);
-        return {...model,values,imputed,color:colors[i],mean:values.reduce((sum,value)=>sum+value,0)/values.length};
-      }), note:'Table 3 · Each cell shows the paper’s rounded success rate, with L0 / L1 / L2 success counts below (10 trials per level). Radar traces and eight-task means use exact counts. Unreported tasks are displayed as 0† and included in the mean, as a visualization convention; they are not measured failures or paper-reported means. Kimodo-Policy*: 182/240 trials (75.83%); Ψ₀: 181/240 (75.42%). * = VLA pretraining. RTC disabled.'};
+        return {...model,values,imputed,color:colors[i],mean:imputed.some(Boolean)?null:values.reduce((sum,value)=>sum+value,0)/values.length};
+      }), note:'Table 3 · Each cell shows the paper’s rounded success rate, with L0 / L1 / L2 success counts below (10 trials per level). Radar traces and eight-task means use exact counts. Unreported tasks are shown as 0† only for visualization, not as measured failures; eight-task means are — when any task is unreported. Baselines follow the sources compiled in the paper, not a unified reevaluation. Kimodo-Policy*: 182/240 trials (75.83%); Ψ₀: 181/240 (75.42%). * = robot-interaction policy pretraining. RTC disabled.'};
     }
     hidden.clear();
     tabs.forEach(tab=>{const active=tab.dataset.benchmark===benchmark;tab.setAttribute('aria-selected',active);tab.tabIndex=active?0:-1; if(active)$('eval-panel').setAttribute('aria-labelledby',tab.id);});
@@ -110,7 +110,7 @@
         const displayValue=benchmark==='simple' && i!=null && !m.imputed[i]?m.paperValues[i]:value;
         const cell=document.createElement('td');cell.textContent=fmt(displayValue);
         if(m.imputed?.[i]){cell.textContent+='†';cell.title='Not reported; displayed as zero for this comparison.';}
-        if(column.key==='mean' && m.imputed?.some(Boolean))cell.title='Eight-task mean with unreported tasks filled with zero.';
+        if(column.key==='mean' && m.imputed?.some(Boolean))cell.title='Eight-task mean unavailable because some tasks are unreported.';
         const sd=column.sdKey?m[column.sdKey]:(i!=null?m.sd?.[i]:null);
         if(sd!=null){const small=document.createElement('small');small.textContent=' ± '+fmt(sd);cell.append(small);}
         if(m.counts?.[i]){
