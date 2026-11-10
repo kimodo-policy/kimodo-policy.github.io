@@ -5,7 +5,7 @@
 <title>Kimodo-Policy: Learning Kinematic Action Models for Humanoid Loco-Manipulation</title>
 <meta name="description" content="Kimodo-Policy introduces Kinematic Action Models: adapting pretrained text-to-motion priors for visually grounded, closed-loop humanoid control through root–body–hand generation.">
 <link rel="icon" type="image/png" href="figure/icon.png?v=b0da17e1">
-<meta name="theme-color" content="#ffffff"><link rel="stylesheet" href="styles.css?v=20261109-cover2">
+<meta name="theme-color" content="#ffffff"><link rel="stylesheet" href="styles.css?v=20261110-reel-citation">
 <link rel="preload" href="assets/inter-latin-bold.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body><header class="site-header">
@@ -40,6 +40,11 @@
 </section>
 <article class="paper-content" aria-label="Kimodo-Policy research overview">
 <section id="overview" class="paper-section" aria-labelledby="overview-title">
+<div class="real-reel" aria-label="Seven real-world task demonstrations">
+<div class="real-reel-heading"><span>REAL-WORLD DEMONSTRATIONS <span class="real-reel-count">/ 07</span></span><div><span class="real-reel-hint">Hover to watch</span><button class="real-reel-toggle" type="button" aria-label="Pause automatic scrolling" aria-pressed="false">Ⅱ</button></div></div>
+<div class="real-reel-viewport"><div class="real-reel-track"></div></div>
+<p class="real-reel-instruction">Seven tasks. Coordinated whole-body motion.</p>
+</div>
 <h2 id="overview-title">From motion generation to humanoid control</h2>
 <div class="overview-visuals">
 <figure class="overview-motion" aria-label="From skeletal motion through articulated humanoid motion to real-world execution">
@@ -92,6 +97,11 @@
 <div class="pretrain-part pretrain-middle" tabindex="0" role="img" aria-label="Dataset composition: 47.60 million frames and 37,248 episodes"><img data-src="figure/pretrainmiddle.png" width="2657" height="2162" alt="" loading="lazy" decoding="async"></div>
 <div class="pretrain-part pretrain-right" tabindex="0" role="img" aria-label="UniFoLM-WBT and Humanoid Everyday task demonstrations"><img data-src="figure/pretrainright.png" width="2719" height="1773" alt="" loading="lazy" decoding="async"></div>
 </div><figcaption><span class="figure-number">FIG. 03</span><span class="figure-caption-text">47.60M frames · 37,248 episodes across three humanoid data sources.</span></figcaption></figure>
+<div id="real-deployment" class="real-deployment">
+<h3>Whole-body teleoperation and data collection</h3>
+<p>Built on and extended from the NVIDIA GR00T-WholeBodyControl teleoperation and data-recording system, our setup uses a <strong>PICO 4 Ultra headset and hand controllers</strong> with <strong>PICO body trackers</strong> to capture whole-body and lower-limb motion. The robot carries an <strong>Intel RealSense D435i</strong> camera and <strong>Dex3-1 dexterous hands</strong>. We collect <strong>25–30 demonstrations per task</strong> across eight real-world tasks and store them in a LeRobot v2.1-compatible format with Kimodo-specific motion and control fields.</p>
+<figure class="paper-figure"><img data-src="figure/deployment-setup-20261107.webp" width="2600" height="829" alt="Closed-loop execution timing with overlapping action chunks, alongside PICO 4 Ultra teleoperation, D435i camera, and Dex3-1 hands." loading="lazy" decoding="async"><figcaption><span class="figure-number">FIG. 04</span><span class="figure-caption-text">Deployment timing and teleoperation configuration. A 15-frame prefix at 30 Hz spans 0.5 seconds, corresponding to 25 tracker frames at 50 Hz. RTC overlaps successive chunks during real-world execution.</span></figcaption></figure>
+</div>
 </section>
 <section id="videos" class="paper-section video-gallery" aria-labelledby="videos-title">
 <h2 id="videos-title">See coordinated whole-body behavior</h2>
@@ -103,12 +113,27 @@
 </div>
 <p id="video-summary" class="video-summary" aria-live="polite"></p>
 <div id="video-panel" role="tabpanel" aria-labelledby="video-tab-real" tabindex="0"><div id="task-video-grid" class="task-video-grid"></div></div>
-<div id="real-deployment" class="real-deployment">
-<h3>Whole-body teleoperation and data collection</h3>
-<p>Built on and extended from the NVIDIA GR00T-WholeBodyControl teleoperation and data-recording system, our setup uses a <strong>PICO 4 Ultra headset and hand controllers</strong> with <strong>PICO body trackers</strong> to capture whole-body and lower-limb motion. The robot carries an <strong>Intel RealSense D435i</strong> camera and <strong>Dex3-1 dexterous hands</strong>. We collect <strong>25–30 demonstrations per task</strong> across eight real-world tasks and store them in a LeRobot v2.1-compatible format with Kimodo-specific motion and control fields.</p>
-<figure class="paper-figure"><img data-src="figure/deployment-setup-20261107.webp" width="2600" height="829" alt="Closed-loop execution timing with overlapping action chunks, alongside PICO 4 Ultra teleoperation, D435i camera, and Dex3-1 hands." loading="lazy" decoding="async"><figcaption><span class="figure-number">FIG. 04</span><span class="figure-caption-text">Deployment timing and teleoperation configuration. A 15-frame prefix at 30 Hz spans 0.5 seconds, corresponding to 25 tracker frames at 50 Hz. RTC overlaps successive chunks during real-world execution.</span></figcaption></figure>
-</div>
+
 <noscript><p>Enable JavaScript to browse the video collections.</p></noscript>
 </section>
+<section id="citation" class="paper-section citation-section" aria-labelledby="citation-title">
+<h2 id="citation-title">Citation</h2>
+<p>If you find Kimodo-Policy useful in your research, please cite our <a href="https://arxiv.org/abs/2611.11554" target="_blank" rel="noopener noreferrer">paper</a>.</p>
+<div class="citation-box"><div class="citation-toolbar"><span>BibTeX · arXiv:2611.11554</span><div><a href="citation.bib" download>Download .bib</a><button id="copy-citation" type="button">Copy BibTeX</button></div></div>
+<pre tabindex="0" aria-label="BibTeX citation"><code id="citation-code">@misc{wang2026kimodopolicy,
+  title  = {{Kimodo-Policy}: Learning Kinematic Action Models for Humanoid Loco-Manipulation},
+  author = {Wang, Yunheng and Zhang, Jiaxi and Lu, Wei and Fang, Yuetong and
+            Wang, Taowen and Feng, Yixiao and Zhang, Shuning and Xu, Junzhe and
+            Wang, Yichi and Yuan, Zizhao and Huang, Kailun and Li, Lusong and
+            Zhou, Mingqian and Zeng, Zecui and Xu, Renjing},
+  year          = {2026},
+  eprint        = {2611.11554},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.RO},
+  doi           = {10.48550/arXiv.2611.11554},
+  url           = {https://arxiv.org/abs/2611.11554}
+}</code></pre></div>
+<p id="citation-status" class="citation-status" role="status" aria-live="polite"></p>
+</section>
 </article>
-</main><script src="script.js"></script><script src="performance-data.js?v=20261110-arxiv"></script><script src="performance.js?v=20261110-arxiv"></script><script src="videos-data.js?v=20261107-r6"></script><script src="videos.js?v=20261107-r6"></script></body></html>
+</main><script src="script.js"></script><script src="performance-data.js?v=20261110-arxiv"></script><script src="performance.js?v=20261110-arxiv"></script><script src="videos-data.js?v=20261107-r6"></script><script src="videos.js?v=20261110-reel-citation"></script><script src="real-reel.js?v=20261110-r1"></script><script src="citation.js?v=20261110-r1"></script></body></html>

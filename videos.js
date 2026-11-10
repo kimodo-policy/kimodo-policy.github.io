@@ -22,7 +22,6 @@
     simple: '8 tasks in Simple · 3 selected clips per task.'
   };
   function show(key) {
-    document.getElementById('real-deployment').hidden = key !== 'real';
     observer.disconnect(); inView.clear();
     grid.querySelectorAll('video').forEach(video => { video.pause(); video.removeAttribute('src'); video.load(); });
     grid.replaceChildren();
