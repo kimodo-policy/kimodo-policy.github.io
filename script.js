@@ -194,28 +194,22 @@ const imageLoader = new IntersectionObserver(entries => {
   });
 }, {rootMargin:'200px'});
 document.querySelectorAll('img[data-src]').forEach(img => imageLoader.observe(img));
-const overviewMotion = document.querySelector('.overview-motion');
-async function setupOverviewReveal() {
-  if (!overviewMotion || !('IntersectionObserver' in window)) return;
-  try {
-    await Promise.all([...overviewMotion.querySelectorAll('img')].map(img => new Promise(resolve => {
-      if (img.complete && img.naturalWidth) resolve();
-      else { img.addEventListener('load', resolve, {once:true}); img.addEventListener('error', resolve, {once:true}); }
-    })));
-  } catch { return; }
-  overviewMotion.classList.add('reveal-ready');
-  let visible = false;
-  const observer = new IntersectionObserver(entries => {
+const motionReplay = document.querySelector('.motion-replay');
+if (motionReplay) {
+  motionReplay.classList.add('motion-ready');
+  let inView = false;
+  let loaded = false;
+  const refresh = () => motionReplay.classList.toggle('is-playing', loaded && (inView || reducedMotion.matches));
+  Promise.all([...motionReplay.querySelectorAll('img')].map(img => new Promise(resolve => {
+    if (img.complete && img.naturalWidth) resolve();
+    else img.addEventListener('load', resolve, {once:true});
+  }))).then(() => { loaded = true; refresh(); });
+  new IntersectionObserver(entries => {
     for (const entry of entries) {
-      visible = entry.isIntersecting;
-      if (reducedMotion.matches) overviewMotion.classList.add('is-revealed');
-      else if (!entry.isIntersecting) overviewMotion.classList.remove('is-revealed');
-      else if (entry.intersectionRatio >= 0.15) overviewMotion.classList.add('is-revealed');
+      if (!entry.isIntersecting) inView = false;
+      else if (entry.intersectionRatio >= .2) inView = true;
+      refresh();
     }
-  }, {threshold:[0, 0.15]});
-  observer.observe(overviewMotion);
-  reducedMotion.addEventListener('change', event => {
-    overviewMotion.classList.toggle('is-revealed', event.matches || visible);
-  });
+  }, {threshold:[0,.2]}).observe(motionReplay);
+  reducedMotion.addEventListener('change', refresh);
 }
-setupOverviewReveal();

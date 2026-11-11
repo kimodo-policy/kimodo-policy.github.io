@@ -5,7 +5,7 @@
 <title>Kimodo-Policy: Learning Kinematic Action Models for Humanoid Loco-Manipulation</title>
 <meta name="description" content="Kimodo-Policy introduces Kinematic Action Models: adapting pretrained text-to-motion priors for visually grounded, closed-loop humanoid control through root–body–hand generation.">
 <link rel="icon" type="image/png" href="figure/icon.png?v=b0da17e1">
-<meta name="theme-color" content="#ffffff"><link rel="stylesheet" href="styles.css?v=20261111-native-video">
+<meta name="theme-color" content="#ffffff"><link rel="stylesheet" href="styles.css?v=20261111-motion">
 <link rel="preload" href="assets/inter-latin-bold.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body><header class="site-header">
@@ -61,10 +61,6 @@
 </div>
 <h2 id="overview-title">From motion generation to humanoid control</h2>
 <div class="overview-visuals">
-<figure class="overview-motion" aria-label="From skeletal motion through articulated humanoid motion to real-world execution">
-<img class="overview-motion-sequence" data-src="figure/overview0.png" width="3615" height="1024" alt="A whole-body motion sequence progresses from a skeletal representation to a physical humanoid manipulating a banana." decoding="async">
-<img class="overview-motion-overlay" data-src="figure/overviewbackground.png" width="4373" height="1157" alt="" aria-hidden="true" decoding="async">
-</figure>
 <figure class="overview-diagram">
 <div class="overview-diagram-image"><img data-src="figure/overview.png" width="3620" height="1173" alt="Kimodo-Policy combines pretraining demonstrations, a text-to-motion backbone, and a root–body–hand architecture, with 678M total parameters and 92M trainable parameters." loading="lazy" decoding="async"></div>
 </figure>
@@ -75,7 +71,7 @@
 <h2 id="method-title">A structured motion prior, grounded in the scene</h2>
 <figure class="paper-figure"><img data-src="figure/method-20261107.webp" width="2600" height="1018" alt="Frozen Kimodo root and body denoisers with trainable visual ControlNet branches and HandNet." loading="lazy" decoding="async"><figcaption><span class="figure-number">FIG. 01</span><span class="figure-caption-text">Frozen motion priors, trainable visual adaptation, and a dedicated hand-control head.</span></figcaption></figure>
 <p><strong class="project-name"><span class="kimodo">Kimodo</span><span class="policy">-Policy</span></strong> combines a frozen, language-conditioned Kimodo backbone with trainable visual ControlNet branches and a dedicated HandNet. A <strong>root–body–hand hierarchy</strong> first predicts global motion, then articulated body motion conditioned on the root trajectory, and finally bilateral hand commands conditioned on body features and visual context. <strong>Dual-Path Fusion</strong> integrates motion-query cross-attention with a mapping from spatial image tokens to the prediction horizon, grounding the inherited motion prior in egocentric observations. Detached inter-stage conditioning preserves forward coordination while separating gradient updates, allowing visual adaptation and hand control to be learned around the frozen motion generator.</p>
-<figure class="paper-figure"><img data-src="figure/motion-prior-transfer-20261109.webp" width="2600" height="1358" alt="A skeletal motion sequence above a physical humanoid transporting a banana, illustrating motion-history constraints and predicted action chunks." loading="lazy" decoding="async"><figcaption><span class="figure-number">FIG. 02</span><span class="figure-caption-text">From a reusable motion prior to scene-grounded execution: observed history constrains each new action chunk, and visual feedback guides continual replanning. Time markers and history/prediction brackets are schematic and do not indicate single-query durations.</span></figcaption></figure>
+<figure class="paper-figure"><div class="motion-replay" role="img" aria-label="Motion history and predicted actions: time axis, skeletal motion, then real-world humanoid execution."><div class="motion-layer motion-axis"><img data-src="figure/motion-prior-transfer-20261109.webp" width="2600" height="1358" alt="" decoding="async"></div><div class="motion-layer motion-skeleton"><img data-src="figure/motion-prior-transfer-20261109.webp" width="2600" height="1358" alt="" decoding="async"></div><div class="motion-layer motion-robot"><img data-src="figure/motion-prior-transfer-20261109.webp" width="2600" height="1358" alt="" decoding="async"></div></div><figcaption><span class="figure-number">FIG. 02</span><span class="figure-caption-text">From a reusable motion prior to scene-grounded execution: observed history constrains each new action chunk, and visual feedback guides continual replanning. Time markers and history/prediction brackets are schematic and do not indicate single-query durations.</span></figcaption></figure>
 <p>The figure illustrates the transition from language-aligned motion synthesis to <strong>closed-loop interaction</strong>. At each policy query, observed motion history constrains the denoising process, while current visual observations guide the generation of a future action chunk. In the real-world configuration, each query uses up to 100 history frames and predicts 50 future frames at 30 Hz (about 1.67 s). A whole-body tracker executes a 15-frame prefix (0.5 s), and the resulting state history and updated image condition the next query. This receding-horizon formulation anchors new predictions to actual execution, preserving the inherited motion structure while enabling continual visual and state-based correction.</p>
 </section>
 <section id="performance" class="paper-section evaluation" aria-labelledby="performance-title">
@@ -150,4 +146,4 @@
 <p id="citation-status" class="citation-status" role="status" aria-live="polite"></p>
 </section>
 </article>
-</main><script src="script.js"></script><script src="performance-data.js?v=20261110-arxiv"></script><script src="performance.js?v=20261110-arxiv"></script><script src="videos-data.js?v=20261107-r6"></script><script src="videos.js?v=20261110-reel-citation"></script><script src="real-reel.js?v=20261110-r1"></script><script src="citation.js?v=20261110-r1"></script><script src="intro-video.js?v=20261111-native-r3"></script></body></html>
+</main><script src="script.js?v=20261111-motion"></script><script src="performance-data.js?v=20261110-arxiv"></script><script src="performance.js?v=20261110-arxiv"></script><script src="videos-data.js?v=20261107-r6"></script><script src="videos.js?v=20261110-reel-citation"></script><script src="real-reel.js?v=20261110-r1"></script><script src="citation.js?v=20261110-r1"></script><script src="intro-video.js?v=20261111-native-r3"></script></body></html>
