@@ -587,3 +587,14 @@ html{scroll-padding-top:0}
 .citation-box pre{margin:0;padding:22px 24px;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;color:#42546d;tab-size:2}
 .paper-section .citation-status{margin:8px 0 0;min-height:20px;font-size:12px;text-align:left;color:#517e00}
 @media(max-width:650px){.citation-toolbar{padding:12px;align-items:flex-start;flex-direction:column}.citation-toolbar>div{width:100%;justify-content:space-between}.citation-box pre{padding:16px;font-size:11px}}
+
+/* Click-to-load project film, above the real-world reel. */
+.intro-film{scroll-margin-top:120px;width:min(1200px,calc(100vw - 80px));margin:0 0 48px;position:relative;left:50%;transform:translateX(-50%)}
+.intro-film-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px;color:#6e89bc;font-size:12px;font-weight:600;letter-spacing:.1em}
+.intro-film-heading a{color:#526b94;font-size:12px;letter-spacing:0;text-decoration:none}.intro-film-heading a:hover{text-decoration:underline}
+.intro-film-player{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#f3f6f9;box-shadow:0 10px 36px #21324912;border:1px solid #dce4ee}
+.intro-film-cover{display:block;width:100%;height:100%;padding:0;border:0;cursor:pointer;background:transparent}.intro-film-cover img{display:block;width:100%;height:100%;object-fit:contain}
+.intro-film-play{position:absolute;inset:0;margin:auto;display:grid;place-items:center;width:76px;height:76px;padding-left:4px;border-radius:50%;color:white;background:#5d9000ed;box-shadow:0 6px 28px #21324940;font-size:30px;transition:transform .2s,background .2s}.intro-film-cover:hover .intro-film-play{transform:scale(1.06);background:#76b900}.intro-film-cover:focus-visible{outline:4px solid #76b900;outline-offset:-5px}
+.intro-film-player iframe{display:block;width:100%;height:100%;border:0}
+@media(max-width:650px){.intro-film{width:100%;margin-bottom:32px}.intro-film-heading{font-size:10px}.intro-film-play{width:56px;height:56px;font-size:24px}}
+@media(prefers-reduced-motion:reduce){.intro-film-play{transition:none}}
