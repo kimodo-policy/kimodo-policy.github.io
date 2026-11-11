@@ -598,3 +598,16 @@ html{scroll-padding-top:0}
 .intro-film-player iframe{display:block;width:100%;height:100%;border:0}
 @media(max-width:650px){.intro-film{width:100%;margin-bottom:32px}.intro-film-heading{font-size:10px}.intro-film-play{width:56px;height:56px;font-size:24px}}
 @media(prefers-reduced-motion:reduce){.intro-film-play{transition:none}}
+
+.intro-film-player video{display:block;width:100%;height:100%;object-fit:contain;background:white}
+.intro-film-shell{border-radius:14px;overflow:hidden;background:#f6f8fb;border:1px solid #dce4ee;box-shadow:0 10px 36px #21324912}
+.intro-film-shell .intro-film-player{border:0;border-radius:0;box-shadow:none}
+.intro-film-controls{display:flex;align-items:center;gap:14px;padding:12px 16px;background:#f6f8fb;color:#425776;font-size:12px}
+.intro-film-controls[hidden]{display:none}.intro-film-controls button{flex-shrink:0;border:1px solid #d9e2ee;border-radius:6px;background:white;color:#425776;padding:7px 10px;cursor:pointer;font:inherit}.intro-film-controls button:hover{border-color:#76b900;color:#527f00}.intro-film-controls button:focus-visible,.intro-film-controls input:focus-visible{outline:2px solid #76b900;outline-offset:3px}
+.intro-film-controls input{min-width:40px;flex:1;accent-color:#76b900;cursor:pointer}.intro-film-controls span{white-space:nowrap;font-variant-numeric:tabular-nums}.intro-film-status{font-size:13px;color:#526b94}
+.intro-film-shell:fullscreen{display:flex;flex-direction:column;justify-content:center;background:#111;border:0;border-radius:0}.intro-film-shell:fullscreen .intro-film-player{flex:1;min-height:0;aspect-ratio:auto}.intro-film-shell:fullscreen .intro-film-controls{flex-shrink:0}
+@media(max-width:650px){.intro-film-controls{gap:7px;padding:10px 8px;flex-wrap:wrap;font-size:11px}.intro-film-controls input{flex-basis:35%}.intro-film-controls button{padding:6px 8px}}
+
+/* Overlay controls without shifting the video when dismissed. */
+.intro-film-shell{position:relative}
+.intro-film-controls{position:absolute;bottom:0;left:0;right:0;z-index:2;background:rgba(246,248,251,.96)}

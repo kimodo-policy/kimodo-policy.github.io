@@ -5,7 +5,7 @@
 <title>Kimodo-Policy: Learning Kinematic Action Models for Humanoid Loco-Manipulation</title>
 <meta name="description" content="Kimodo-Policy introduces Kinematic Action Models: adapting pretrained text-to-motion priors for visually grounded, closed-loop humanoid control through root–body–hand generation.">
 <link rel="icon" type="image/png" href="figure/icon.png?v=b0da17e1">
-<meta name="theme-color" content="#ffffff"><link rel="stylesheet" href="styles.css?v=20261111-intro-video">
+<meta name="theme-color" content="#ffffff"><link rel="stylesheet" href="styles.css?v=20261111-native-video">
 <link rel="preload" href="assets/inter-latin-bold.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body><header class="site-header">
@@ -42,8 +42,17 @@
 <section id="overview" class="paper-section" aria-labelledby="overview-title">
 <section class="intro-film" id="introduction-video" aria-label="Project introduction video">
 <div class="intro-film-heading"><span>PROJECT VIDEO</span><a href="https://youtu.be/dXECtGHerd0" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div>
-<div class="intro-film-player"><button class="intro-film-cover" type="button" aria-label="Play the Kimodo-Policy introduction video"><img src="assets/introduction-cover.jpeg" width="1073" height="601" alt="Kimodo-Policy introduction video cover" loading="lazy"><span class="intro-film-play" aria-hidden="true">▶</span></button></div>
-<noscript><p><a href="https://youtu.be/dXECtGHerd0">Watch the introduction on YouTube</a></p></noscript>
+<div class="intro-film-shell">
+<div class="intro-film-player"><video id="intro-film-video" controls playsinline preload="none" poster="assets/introduction-cover.jpeg" aria-label="Kimodo-Policy introduction video"><source src="assets/introduction.mp4" type="video/mp4"></video></div>
+<div class="intro-film-controls" hidden>
+<button type="button" data-intro-play aria-label="Play introduction video">Play</button>
+<input data-intro-seek type="range" min="0" max="100" step="0.1" value="0" aria-label="Video playback position">
+<span data-intro-time>0:00 / 1:36</span>
+<button type="button" data-intro-mute aria-label="Mute video" aria-pressed="false">Sound on</button>
+<button type="button" data-intro-fullscreen aria-label="Enter fullscreen">Fullscreen</button>
+</div>
+</div>
+<p class="intro-film-status" role="status" hidden>Unable to load the video. <a href="https://youtu.be/dXECtGHerd0" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></p>
 </section>
 <div class="real-reel" aria-label="Seven real-world task demonstrations">
 <div class="real-reel-heading"><span>REAL-WORLD DEMONSTRATIONS <span class="real-reel-count">/ 07</span></span><div><span class="real-reel-hint">Hover to watch</span><button class="real-reel-toggle" type="button" aria-label="Pause automatic scrolling" aria-pressed="false">Ⅱ</button></div></div>
@@ -141,4 +150,4 @@
 <p id="citation-status" class="citation-status" role="status" aria-live="polite"></p>
 </section>
 </article>
-</main><script src="script.js"></script><script src="performance-data.js?v=20261110-arxiv"></script><script src="performance.js?v=20261110-arxiv"></script><script src="videos-data.js?v=20261107-r6"></script><script src="videos.js?v=20261110-reel-citation"></script><script src="real-reel.js?v=20261110-r1"></script><script src="citation.js?v=20261110-r1"></script><script src="intro-video.js?v=20261111-r1"></script></body></html>
+</main><script src="script.js"></script><script src="performance-data.js?v=20261110-arxiv"></script><script src="performance.js?v=20261110-arxiv"></script><script src="videos-data.js?v=20261107-r6"></script><script src="videos.js?v=20261110-reel-citation"></script><script src="real-reel.js?v=20261110-r1"></script><script src="citation.js?v=20261110-r1"></script><script src="intro-video.js?v=20261111-native-r3"></script></body></html>
